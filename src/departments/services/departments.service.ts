@@ -1,6 +1,10 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { CreateDepartmentDto } from '../dto/create-department.dto'
 import { UpdateDepartmentDto } from '../dto/update-department.dto'
+
+interface WhereOptions {
+  [key: string]: any
+}
 
 @Injectable()
 export class DepartmentsService {
@@ -8,7 +12,8 @@ export class DepartmentsService {
     return 'This action adds a new department'
   }
 
-  findAll() {
+  findAll(where?: WhereOptions) {
+    console.log(where)
     return `This action returns all departments`
   }
 
