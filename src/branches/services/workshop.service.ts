@@ -1,7 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common'
-import { ConfigType } from '@nestjs/config'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import config from '../../conf'
 import { BranchOffice } from '../entities/branch.entity'
 import { Repository } from 'typeorm'
 import { CreateBranchDto } from '../dtos/branch.dto'
@@ -17,11 +15,18 @@ export class WorkshopService {
     return branches
   }
 
-  findOne(id: number): Promise<BranchOffice> {
-    return this.branchRepo.findOne({ where: { id } })
+  async findOne(id: number): Promise<BranchOffice> {
+    const branch: BranchOffice = await this.branchRepo.findOne({
+      where: { id }
+    })
+    if (branch === null) {
+      throw new NotFoundException()
+    }
+
+    return branch
   }
 
-  create(branch: CreateBranchDto): Promise<BranchOffice> {
+  async create(branch: CreateBranchDto): Promise<BranchOffice> {
     const newBranch: BranchOffice = this.branchRepo.create(branch)
 
     return this.branchRepo.save(newBranch)
@@ -29,16 +34,24 @@ export class WorkshopService {
 
   async update(
     id: number,
-    partialBranch: Partial<BranchOffice>
+    branchUpdate: CreateBranchDto
   ): Promise<BranchOffice> {
-    const prevBranch: BranchOffice = await this.branchRepo.findOne({
+    const branch: BranchOffice = await this.branchRepo.findOne({
       where: { id }
     })
-    const result: BranchOffice = await this.branchRepo.merge(
-      prevBranch,
-      partialBranch
-    )
+    if (branch === null) {
+      const newBranch: BranchOffice = await this.branchRepo.create(branchUpdate)
 
-    return result
+      return this.branchRepo.save(newBranch)
+    } else {
+      return this.branchRepo.merge({ ...branch, ...branchUpdate }, branch)
+    }
+  }
+
+  async delete(id: number): Promise<void> {
+    const { affected } = await this.branchRepo.delete(id)
+    if (affected === 0) {
+      throw new NotFoundException()
+    }
   }
 }

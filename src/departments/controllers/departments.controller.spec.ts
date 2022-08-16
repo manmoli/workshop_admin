@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { DepartmentsController } from './departments.controller'
 import { DepartmentsService } from '../services/departments.service'
+import { CreateDepartmentDto } from '../dto/create-department.dto'
 
 describe('DepartmentsController', () => {
   let controller: DepartmentsController
@@ -16,5 +17,9 @@ describe('DepartmentsController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined()
+    const createDepartmentDto: CreateDepartmentDto = {
+      
+    }
+    controller.create(createDepartmentDto)
   })
 })
