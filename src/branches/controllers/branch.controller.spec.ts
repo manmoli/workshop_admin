@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { WorkshopController } from './branch.controller'
-import { WorkshopService } from '../services/workshop.service'
+import { WorkshopService } from '../services/branch.service'
 
 describe('AppController', () => {
   let appController: WorkshopController
