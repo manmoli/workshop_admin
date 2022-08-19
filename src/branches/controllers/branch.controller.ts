@@ -7,21 +7,15 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  Put,
-  Query,
-  Res
+  Put
 } from '@nestjs/common'
-import { DepartmentsService } from '../../departments/services/departments.service'
-import { CreateBranchDto, UpdateBranchDto } from '../dtos/branch.dto'
+import { CreateBranchDto } from '../dtos/branch.dto'
 import { BranchOffice } from '../entities/branch.entity'
-import { WorkshopService } from '../services/workshop.service'
+import { WorkshopService } from '../services/branch.service'
 
 @Controller('branch')
 export class WorkshopController {
-  constructor(
-    private workShopService: WorkshopService,
-    private departmentsService: DepartmentsService
-  ) {}
+  constructor(private workShopService: WorkshopService) {}
 
   @Get()
   get(): Promise<BranchOffice[]> {
@@ -50,7 +44,7 @@ export class WorkshopController {
   }
 
   @Get(':id/departments')
-  getDepartments(@Param('id', ParseIntPipe) id: number) {
-    return this.departmentsService.findAll({ branchId: id })
+  getDepartments(@Param('id', ParseIntPipe) id: number): Array<any> {
+    return []
   }
 }

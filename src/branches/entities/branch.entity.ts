@@ -9,6 +9,8 @@ export class BranchOffice {
   @Column({ type: 'varchar', unique: true })
   name: string
 
-  @OneToMany(() => Department, (department) => department.branch)
+  @OneToMany(() => Department, (department) => department.branch, {
+    onDelete: 'CASCADE'
+  })
   departments: Department[]
 }

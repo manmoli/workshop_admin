@@ -20,7 +20,7 @@ export class WorkshopService {
       where: { id }
     })
     if (branch === null) {
-      throw new NotFoundException()
+      throw new NotFoundException('branch not found')
     }
 
     return branch

@@ -1,6 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { WorkshopService } from '../../branches/services/branch.service'
 import { CreateDepartmentDto } from '../dto/create-department.dto'
 import { UpdateDepartmentDto } from '../dto/update-department.dto'
+import { Department } from '../entities/department.entity'
 
 interface WhereOptions {
   [key: string]: any
@@ -8,8 +12,19 @@ interface WhereOptions {
 
 @Injectable()
 export class DepartmentsService {
-  create(createDepartmentDto: CreateDepartmentDto) {
-    return 'This action adds a new department'
+  constructor(
+    private readonly branchService: WorkshopService,
+    @InjectRepository(Department) private departmentRepo: Repository<Department>
+  ) {}
+  async create(createDepartmentDto: CreateDepartmentDto) {
+    const branch = await this.branchService.findOne(
+      createDepartmentDto.branchId
+    )
+
+    const department = await this.departmentRepo.create(createDepartmentDto)
+    department.branch = branch
+
+    return department
   }
 
   findAll(where?: WhereOptions) {

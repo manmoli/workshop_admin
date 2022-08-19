@@ -1,6 +1,7 @@
-import { Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { BranchOffice } from '../../branches/entities/branch.entity'
 
+@Entity()
 export class Department {
   @PrimaryGeneratedColumn()
   id: number
@@ -8,6 +9,9 @@ export class Department {
   @Column({ type: 'varchar', unique: true })
   name: string
 
-  @ManyToOne(() => BranchOffice, (branch) => branch.departments)
+  @ManyToOne(() => BranchOffice, (branch) => branch.departments, {
+    nullable: false,
+    onDelete: 'CASCADE'
+  })
   branch: BranchOffice
 }
