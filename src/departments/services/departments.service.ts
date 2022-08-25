@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { DeleteResult, EntityNotFoundError, Repository } from 'typeorm'
 import { WorkshopService } from '../../branches/services/branch.service'
+import { AttributeWithNameAlreadyExists } from '../../Errors/customDatabaseErrors'
 import { CreateDepartmentDto } from '../dto/create-department.dto'
 import { UpdateDepartmentDto } from '../dto/update-department.dto'
 import { Department } from '../entities/department.entity'
-
-interface WhereOptions {
-  [key: string]: any
-}
+import * as _ from 'lodash'
+import { FindOptions } from '../../utils/types'
 
 @Injectable()
 export class DepartmentsService {
@@ -17,30 +16,67 @@ export class DepartmentsService {
     @InjectRepository(Department) private departmentRepo: Repository<Department>
   ) {}
   async create(createDepartmentDto: CreateDepartmentDto) {
-    const branch = await this.branchService.findOne(
-      createDepartmentDto.branchId
-    )
+    await this.#checkIfDepartmentExists(createDepartmentDto)
 
     const department = await this.departmentRepo.create(createDepartmentDto)
-    department.branch = branch
+    await this.departmentRepo.save(department)
 
     return department
   }
 
-  findAll(where?: WhereOptions) {
-    console.log(where)
-    return `This action returns all departments`
+  async findAll(findOptions?: FindOptions<Department>) {
+    const departments: Department[] = await this.departmentRepo.find(
+      findOptions
+    )
+    return departments
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} department`
+  async findOne(id: number): Promise<Department> {
+    const department: Department = await this.departmentRepo.findOneOrFail({
+      where: { id },
+      relations: { branch: true }
+    })
+
+    return department
   }
 
-  update(id: number, updateDepartmentDto: UpdateDepartmentDto) {
-    return `This action updates a #${id} department`
+  async update(
+    id: number,
+    updateDepartmentDto: UpdateDepartmentDto
+  ): Promise<Department> {
+    const { affected } = await this.departmentRepo.update(
+      { id },
+      updateDepartmentDto
+    )
+
+    if (_.isNil(affected) || affected === 0) {
+      throw new EntityNotFoundError(Department, id)
+    }
+
+    const updatedDepartment: Department = await this.departmentRepo.findOne({
+      where: { id }
+    })
+
+    return updatedDepartment
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} department`
+  async remove(id: number) {
+    const deleteResult: DeleteResult = await this.departmentRepo.delete({ id })
+
+    console.log(deleteResult.affected)
+
+    return deleteResult.affected === 1
+  }
+
+  async #checkIfDepartmentExists(
+    department: CreateDepartmentDto
+  ): Promise<void> {
+    const departmentFound: Department = await this.departmentRepo.findOne({
+      where: department
+    })
+
+    if (!_.isNil(departmentFound)) {
+      throw new AttributeWithNameAlreadyExists()
+    }
   }
 }

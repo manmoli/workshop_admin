@@ -9,6 +9,9 @@ export class Department {
   @Column({ type: 'varchar', unique: true })
   name: string
 
+  @Column({ type: 'int' })
+  branchId: number
+
   @ManyToOne(() => BranchOffice, (branch) => branch.departments, {
     nullable: false,
     onDelete: 'CASCADE'
