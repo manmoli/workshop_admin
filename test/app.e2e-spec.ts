@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
 import * as request from 'supertest'
-import { BranchModule } from '../src/branches/branch.module'
+import { BranchModule } from '../src/modules/branches/branch.module'
 
 describe('AppController (e2e)', () => {
   let app: INestApplication

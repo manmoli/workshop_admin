@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common'
 import { DataSource } from 'typeorm'
-import { BranchModule } from './branches/branch.module'
-import { DepartmentsModule } from './departments/departments.module'
+import { BranchModule } from './modules/branches/branch.module'
+import { DepartmentsModule } from './modules/departments/departments.module'
 import { ConfigModule } from '@nestjs/config'
 import { environments } from './environments'
 import { DatabaseModule } from './database/database.module'
 import config from './conf'
 import { joiValidator } from './envValidatorSchema'
+import { ClientsModule } from './modules/clients/clients.module'
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { joiValidator } from './envValidatorSchema'
     }),
     BranchModule,
     DepartmentsModule,
-    DatabaseModule
+    DatabaseModule,
+    ClientsModule
   ]
 })
 export class AppModule {

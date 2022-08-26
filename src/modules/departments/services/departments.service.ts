@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { DeleteResult, EntityNotFoundError, Repository } from 'typeorm'
 import { WorkshopService } from '../../branches/services/branch.service'
-import { AttributeWithNameAlreadyExists } from '../../Errors/customDatabaseErrors'
+import { AttributeWithNameAlreadyExists } from '../../../Errors/customDatabaseErrors'
 import { CreateDepartmentDto } from '../dto/create-department.dto'
 import { UpdateDepartmentDto } from '../dto/update-department.dto'
 import { Department } from '../entities/department.entity'
 import * as _ from 'lodash'
-import { FindOptions } from '../../utils/types'
+import { FindOptions } from '../../../utils/types'
 
 @Injectable()
 export class DepartmentsService {
