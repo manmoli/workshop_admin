@@ -6,7 +6,7 @@ export class Person {
   id: number
 
   @Column({ type: 'varchar' })
-  fist_name: string
+  first_name: string
 
   @Column({ type: 'varchar' })
   second_name: string

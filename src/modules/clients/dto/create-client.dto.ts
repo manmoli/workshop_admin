@@ -3,7 +3,7 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
 export class CreateClientDto {
   @IsString()
   @IsNotEmpty()
-  fist_name: string
+  first_name: string
 
   @IsString()
   @IsOptional()
@@ -24,4 +24,8 @@ export class CreateClientDto {
   @IsString()
   @IsOptional()
   tax_id: string
+
+  @IsString()
+  @IsOptional()
+  client_id: string
 }

@@ -46,7 +46,7 @@ describe('ClientsController', () => {
     const findOptions: FindOptions<Client> = {
       take: 10,
       where: {
-        fist_name: 'Manuel'
+        first_name: 'Manuel'
       }
     }
     const clients: Client[] = await clientsController.findAll(findOptions)
