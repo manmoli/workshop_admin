@@ -70,8 +70,6 @@ describe('ClientsController', () => {
       createClientDto
     )
 
-    console.log(updatedClient)
-
     expect(updatedClient).toBeInstanceOf(Client)
     expect(updatedClient).toEqual(updatedSpecificClient)
     expect(clientSpyService.update).toHaveBeenCalledWith(

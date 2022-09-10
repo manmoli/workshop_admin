@@ -28,8 +28,8 @@ export class ClientsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Client {
-    return this.clientsService.findOne(+id)
+  findOne(@Param('id') id: number): Promise<Client> {
+    return this.clientsService.findOne(id)
   }
 
   @Patch(':id')

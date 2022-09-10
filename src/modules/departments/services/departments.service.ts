@@ -63,8 +63,6 @@ export class DepartmentsService {
   async remove(id: number) {
     const deleteResult: DeleteResult = await this.departmentRepo.delete({ id })
 
-    console.log(deleteResult.affected)
-
     return deleteResult.affected === 1
   }
 

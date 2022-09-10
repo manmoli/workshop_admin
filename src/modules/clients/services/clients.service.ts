@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { EntityNotFoundError, Repository } from 'typeorm'
 import { FindOptions } from '../../../utils/types'
 import { CreateClientDto } from '../dto/create-client.dto'
 import { UpdateClientDto } from '../dto/update-client.dto'
@@ -26,12 +26,26 @@ export class ClientsService {
     return clients
   }
 
-  findOne(id: number): any {
-    return `This action returns a #${id} client`
+  async findOne(id: number): Promise<Client> {
+    const client: Client = await this.clientRepo.findOneBy({ id })
+
+    if (client === null) {
+      throw new EntityNotFoundError(Client, { id })
+    }
+
+    return client
   }
 
-  update(id: number, updateClientDto: UpdateClientDto): any {
-    return `This action updates a #${id} client`
+  async update(id: number, updateClientDto: UpdateClientDto): Promise<Client> {
+    const { affected } = await this.clientRepo.update({ id }, updateClientDto)
+
+    if (_.isNil(affected) || affected === 0) {
+      throw new EntityNotFoundError(Client, { id })
+    }
+
+    const client: Client = await this.clientRepo.findOneBy({ id })
+
+    return client
   }
 
   remove(id: number): any {

@@ -15,7 +15,7 @@ import { ClientsService } from './clients.service'
 import config from '../../../conf'
 import { ClientsModule } from '../clients.module'
 import { FindOptions } from '../../../utils/types'
-import { Repository } from 'typeorm'
+import { EntityNotFoundError, QueryFailedError, Repository, UpdateValuesMissingError } from 'typeorm'
 import { getRepositoryToken } from '@nestjs/typeorm'
 
 describe('ClientsService', () => {
@@ -102,5 +102,70 @@ describe('ClientsService', () => {
     })
   })
 
-  describe('update', () => {})
+  describe('findOne', () => {
+    let id: number
+    beforeEach(async () => {
+      const { identifiers } = await clientRepo.insert([
+        createClientDto,
+        createClientDto1
+      ])
+      id = identifiers[0].id
+    })
+
+    it('should find a client', async () => {
+      const client: Client = await clientService.findOne(id)
+
+      expect(client).toEqual(expect.objectContaining(createClientDto))
+    })
+
+    it('should fail when no client found', async () => {
+      const nonExistingId = 0
+
+      await expect(clientService.findOne(nonExistingId)).rejects.toBeInstanceOf(
+        EntityNotFoundError
+      )
+    })
+  })
+
+  describe('update', () => {
+    let id
+    const nonExistingTaxId = 'MOPM999999AB2'
+    beforeEach(async () => {
+      id = (await clientRepo.insert([createClientDto])).raw[0].id
+    })
+    it('should update a client', async () => {
+      const client: Client = await clientService.update(id, {
+        tax_id: nonExistingTaxId
+      })
+
+      expect(client).toEqual(
+        expect.objectContaining({
+          ...createClientDto,
+          tax_id: nonExistingTaxId
+        })
+      )
+    })
+
+    it('should return not found error when the client does not exists', async () => {
+      const nonExistingId = 0
+
+      await expect(
+        clientService.update(nonExistingId, { tax_id: nonExistingTaxId })
+      ).rejects.toBeInstanceOf(EntityNotFoundError)
+    })
+
+    it('should fail because violates the unique tax id constraint', async () => {
+      const id = (await clientRepo.insert([createClientDto1])).raw[0].id
+
+      await expect(
+        clientService.update(id, { tax_id: createClientDto.tax_id })
+      ).rejects.toBeInstanceOf(QueryFailedError)
+    })
+
+    it('should fail because no update data passed', async () => {
+      await expect(clientService.update(id, {})).rejects.toBeInstanceOf(
+        UpdateValuesMissingError
+      )
+    })
+  })
 })
