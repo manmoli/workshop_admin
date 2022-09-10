@@ -17,6 +17,7 @@ import { ClientsModule } from '../clients.module'
 import { FindOptions } from '../../../utils/types'
 import { EntityNotFoundError, QueryFailedError, Repository, UpdateValuesMissingError } from 'typeorm'
 import { getRepositoryToken } from '@nestjs/typeorm'
+import { NotFoundException } from '@nestjs/common'
 
 describe('ClientsService', () => {
   let clientService: ClientsService
@@ -133,6 +134,7 @@ describe('ClientsService', () => {
     beforeEach(async () => {
       id = (await clientRepo.insert([createClientDto])).raw[0].id
     })
+
     it('should update a client', async () => {
       const client: Client = await clientService.update(id, {
         tax_id: nonExistingTaxId
@@ -165,6 +167,27 @@ describe('ClientsService', () => {
     it('should fail because no update data passed', async () => {
       await expect(clientService.update(id, {})).rejects.toBeInstanceOf(
         UpdateValuesMissingError
+      )
+    })
+  })
+
+  describe('remove', () => {
+    let id
+    beforeEach(async () => {
+      id = (await clientRepo.insert([createClientDto])).raw[0].id
+    })
+
+    it('should remove a client', async () => {
+      const removed: boolean = await clientService.remove(id)
+
+      expect(removed).toBe(true)
+    })
+
+    it('should fails when client not found', async () => {
+      const nonExistingId = 0
+
+      expect(clientService.remove(nonExistingId)).rejects.toBeInstanceOf(
+        EntityNotFoundError
       )
     })
   })

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { EntityNotFoundError, Repository } from 'typeorm'
 import { FindOptions } from '../../../utils/types'
@@ -48,8 +48,14 @@ export class ClientsService {
     return client
   }
 
-  remove(id: number): any {
-    return `This action removes a #${id} client`
+  async remove(id: number): Promise<boolean> {
+    const { affected } = await this.clientRepo.delete({ id })
+
+    if (affected === 0) {
+      throw new EntityNotFoundError(Client, { id })
+    }
+
+    return affected === 1
   }
 
   #generateClientId(clientData: CreateClientDto): string {

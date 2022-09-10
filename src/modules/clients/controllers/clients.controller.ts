@@ -5,7 +5,8 @@ import {
   Body,
   Patch,
   Param,
-  Delete
+  Delete,
+  HttpCode
 } from '@nestjs/common'
 import { ClientsService } from '../services/clients.service'
 import { CreateClientDto } from '../dto/create-client.dto'
@@ -40,6 +41,7 @@ export class ClientsController {
     return this.clientsService.update(id, updateClientDto)
   }
 
+  @HttpCode(204)
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.clientsService.remove(id)
