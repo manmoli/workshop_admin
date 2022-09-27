@@ -5,7 +5,7 @@ import {
   HttpStatus
 } from '@nestjs/common'
 import { Response, Request } from 'express'
-import { QueryFailedError, TypeORMError } from 'typeorm'
+import { EntityNotFoundError, QueryFailedError, TypeORMError } from 'typeorm'
 
 const typeOrmErrorList = {
   duplicateKeyValue:
@@ -38,6 +38,9 @@ export class TypeORMErrorFilter implements ExceptionFilter {
         if (responseObject.message === typeOrmErrorList.duplicateKeyValue) {
           responseObject.statusCode = HttpStatus.CONFLICT
         }
+        break
+      case EntityNotFoundError:
+        responseObject.statusCode = HttpStatus.NOT_FOUND
         break
     }
     response.status(status).json(responseObject)

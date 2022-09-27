@@ -10,7 +10,6 @@ import { EntityNotFoundError, Repository } from 'typeorm'
 import { Client } from '../../clients/entities/client.entity'
 import { getRepositoryToken } from '@nestjs/typeorm'
 import { createClientDto } from '../../../testing/dummies/clients'
-import { Request } from 'express'
 
 describe('ClientCheckMiddleware', () => {
   let clientRepo: Repository<Client>

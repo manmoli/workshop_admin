@@ -14,7 +14,7 @@ import { UpdateClientDto } from '../dto/update-client.dto'
 import { FindOptions } from '../../../utils/types'
 import { Client } from '../entities/client.entity'
 
-@Controller('clients')
+@Controller()
 export class ClientsController {
   constructor(private readonly clientsService: ClientsService) {}
 

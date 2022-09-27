@@ -8,18 +8,18 @@ export class Person {
   @Column({ type: 'varchar' })
   first_name: string
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   second_name: string
 
   @Column({ type: 'varchar' })
   last_name: string
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   age: number
 
-  @Column({ type: 'varchar', unique: true })
+  @Column({ type: 'varchar', unique: true, nullable: true })
   image_url: string
 
-  @Column({ type: 'varchar', unique: true })
+  @Column({ type: 'varchar', unique: true, nullable: true })
   tax_id: string
 }

@@ -11,7 +11,6 @@ export class ClientCheckMiddleware implements NestMiddleware {
   ) {}
 
   async use(req: Request, res: Response, next: () => void) {
-    console.log(req)
     const clientId: number = +req.params.client_id
     const client: Client = await this.clientRepo.findOneBy({ id: clientId })
 

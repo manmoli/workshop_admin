@@ -7,7 +7,6 @@ import {
   clientsForCreation,
   createClientDto,
   createClientDto1,
-  createClientDto2,
   createClientDto3
 } from '../../../testing/dummies/clients'
 import { Client } from '../entities/client.entity'
@@ -15,9 +14,13 @@ import { ClientsService } from './clients.service'
 import config from '../../../conf'
 import { ClientsModule } from '../clients.module'
 import { FindOptions } from '../../../utils/types'
-import { EntityNotFoundError, QueryFailedError, Repository, UpdateValuesMissingError } from 'typeorm'
+import {
+  EntityNotFoundError,
+  QueryFailedError,
+  Repository,
+  UpdateValuesMissingError
+} from 'typeorm'
 import { getRepositoryToken } from '@nestjs/typeorm'
-import { NotFoundException } from '@nestjs/common'
 
 describe('ClientsService', () => {
   let clientService: ClientsService
