@@ -5,11 +5,14 @@ import {
   Body,
   Patch,
   Param,
-  Delete
+  Delete,
+  Query
 } from '@nestjs/common'
 import { VehiclesService } from '../services/vehicles.service'
 import { CreateVehicleDto } from '../dto/create-vehicle.dto'
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto'
+import { FindOptions } from '../../../utils/types'
+import { Vehicle } from '../entities/vehicle.entity'
 
 @Controller()
 export class VehiclesController {
@@ -20,26 +23,26 @@ export class VehiclesController {
     @Param('clientId') clientId: number,
     @Body() createVehicleDto: CreateVehicleDto
   ) {
-    return this.vehiclesService.create(createVehicleDto)
+    return this.vehiclesService.create({ ...createVehicleDto, clientId })
   }
 
   @Get()
-  findAll() {
-    return this.vehiclesService.findAll()
+  findAll(@Query() findOptions: FindOptions<Vehicle>) {
+    return this.vehiclesService.findAll(findOptions)
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.vehiclesService.findOne(+id)
+  findOne(@Param('id') id: number) {
+    return this.vehiclesService.findOne(id)
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVehicleDto: UpdateVehicleDto) {
-    return this.vehiclesService.update(+id, updateVehicleDto)
+  update(@Param('id') id: number, @Body() updateVehicleDto: UpdateVehicleDto) {
+    return this.vehiclesService.update(id, updateVehicleDto)
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.vehiclesService.remove(+id)
   }
 }

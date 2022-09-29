@@ -30,4 +30,8 @@ export class CreateVehicleDto {
 
   @IsString()
   category: string
+
+  @IsNumber()
+  @IsOptional()
+  clientId: number
 }

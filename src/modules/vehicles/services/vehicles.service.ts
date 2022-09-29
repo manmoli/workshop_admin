@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common'
+import { FindOptions } from '../../../utils/types'
 import { CreateVehicleDto } from '../dto/create-vehicle.dto'
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto'
+import { Vehicle } from '../entities/vehicle.entity'
 
 @Injectable()
 export class VehiclesService {
@@ -8,7 +10,7 @@ export class VehiclesService {
     return 'This action adds a new vehicle'
   }
 
-  findAll() {
+  findAll(findOptions: FindOptions<Vehicle>) {
     return `This action returns all vehicles`
   }
 

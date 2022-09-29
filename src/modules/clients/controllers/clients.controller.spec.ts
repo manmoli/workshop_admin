@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { ClientsController } from './clients.controller'
 import { ClientsService } from '../services/clients.service'
 import {
-  client1,
   clientsArray,
   createClientDto,
   specificClient,
