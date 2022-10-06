@@ -34,4 +34,8 @@ export class CreateVehicleDto {
   @IsNumber()
   @IsOptional()
   clientId: number
+
+  @IsString()
+  @IsOptional()
+  registration: string
 }

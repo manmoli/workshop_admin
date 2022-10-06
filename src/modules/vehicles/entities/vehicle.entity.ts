@@ -39,6 +39,9 @@ export class Vehicle {
   @Column({ type: 'int', nullable: false })
   clientId: number
 
+  @Column({ type: 'varchar', nullable: true, unique: true })
+  registration: string
+
   @ManyToOne(() => Client, (client) => client.vehicles, { nullable: false })
   client: Client
 }
