@@ -17,6 +17,7 @@ import { VehiclesModule } from './modules/vehicles/vehicles.module'
 import { vehicleRouteTree } from './modules/vehicles/routes'
 import { RouterModule } from '@nestjs/core'
 import { ClientCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
+import { MechanicsModule } from './modules/mechanics/mechanics.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { ClientCheckMiddleware } from './modules/vehicles/middlewares/client-che
           }
         ]
       }
-    ])
+    ]),
+    MechanicsModule
   ]
 })
 export class AppModule implements NestModule {

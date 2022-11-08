@@ -2,7 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { getRepositoryToken } from '@nestjs/typeorm'
 import { EntityNotFoundError, QueryFailedError, Repository } from 'typeorm'
 import { AppModule } from '../../../app.module'
-import { createClientDto, createClientDto1 } from '../../../testing/dummies/clients'
+import {
+  createClientDto,
+  createClientDto1
+} from '../../../testing/dummies/clients'
 import {
   createVehicleDto,
   updateVehicleDto,
