@@ -51,11 +51,10 @@ describe('AppController (e2e)', () => {
       const response: request.Response = await request(app.getHttpServer())
         .get(`/clients/${clientId}/vehicles`)
         .expect(200)
-        .expect([])
 
       expect(response.statusCode).toEqual(200)
       expect(response.body).toBeInstanceOf(Array<Vehicle>)
-      expect(response.body[0]).toEqual(expect.objectContaining(createClientDto))
+      expect(response.body[0]).toEqual(expect.objectContaining(createVehicleDto))
     })
   })
 })

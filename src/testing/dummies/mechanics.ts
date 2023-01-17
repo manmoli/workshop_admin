@@ -8,7 +8,8 @@ export const createMechanicDto: CreateMechanicDto = {
   last_name: 'LaV',
   age: 31,
   image_url: '',
-  tax_id: 'MOPM910802HF2'
+  tax_id: 'MOPM910802HF2',
+  phone_number: '9994477040'
 }
 
 export const updatedMechanicDto: UpdateMechanicDto = {

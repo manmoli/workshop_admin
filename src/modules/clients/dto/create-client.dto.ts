@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class CreateClientDto {
   @IsString()
@@ -13,7 +13,7 @@ export class CreateClientDto {
   @IsNotEmpty()
   last_name: string
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
   age: number
 
@@ -28,4 +28,8 @@ export class CreateClientDto {
   @IsString()
   @IsOptional()
   client_id: string
+
+  @IsString()
+  @IsOptional()
+  phone_number: string
 }

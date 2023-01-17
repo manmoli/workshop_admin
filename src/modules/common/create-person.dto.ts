@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class CreatePersonDto {
   @IsString()
@@ -24,4 +24,8 @@ export class CreatePersonDto {
   @IsString()
   @IsOptional()
   tax_id: string
+
+  @IsString()
+  @IsOptional()
+  phone_number: string
 }

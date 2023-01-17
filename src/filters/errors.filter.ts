@@ -8,8 +8,7 @@ import { Response, Request } from 'express'
 import { EntityNotFoundError, QueryFailedError, TypeORMError } from 'typeorm'
 
 const typeOrmErrorList = {
-  duplicateKeyValue:
-    'duplicate key value violates unique constraint "UQ_ed90edcfa924ec9ec45da7c66d7"'
+  duplicateKeyValue: 'duplicate key value violates unique constraint'
 }
 
 interface ErrorResponse {
@@ -35,14 +34,17 @@ export class TypeORMErrorFilter implements ExceptionFilter {
 
     switch (exception.constructor) {
       case QueryFailedError:
-        if (responseObject.message === typeOrmErrorList.duplicateKeyValue) {
+        if (
+          responseObject.message.includes(typeOrmErrorList.duplicateKeyValue)
+        ) {
           responseObject.statusCode = HttpStatus.CONFLICT
+          responseObject.message = exception['detail']
         }
         break
       case EntityNotFoundError:
         responseObject.statusCode = HttpStatus.NOT_FOUND
         break
     }
-    response.status(status).json(responseObject)
+    response.status(responseObject.statusCode).json(responseObject)
   }
 }

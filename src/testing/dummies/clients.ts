@@ -8,7 +8,8 @@ export const createClientDto: CreateClientDto = {
   age: 31,
   image_url: 'dsoiuasd93fd',
   tax_id: 'MOPM910802HF2',
-  client_id: ''
+  client_id: '',
+  phone_number: '8172381723'
 }
 
 export const createClientDto1: CreateClientDto = {

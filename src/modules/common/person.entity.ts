@@ -22,4 +22,7 @@ export class Person {
 
   @Column({ type: 'varchar', unique: true, nullable: true })
   tax_id: string
+
+  @Column({ type: 'varchar', unique: true, nullable: true })
+  phone_number: string
 }

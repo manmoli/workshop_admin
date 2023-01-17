@@ -13,7 +13,7 @@ export class ClientsService {
     @InjectRepository(Client) private clientRepo: Repository<Client>
   ) {}
   async create(createClientDto: CreateClientDto): Promise<Client> {
-    createClientDto.client_id = this.#generateClientId(createClientDto)
+    createClientDto.client_id = await this.#generateClientId(createClientDto)
     const client: Client = await this.clientRepo.create(createClientDto)
     await this.clientRepo.save(client)
 
@@ -58,17 +58,23 @@ export class ClientsService {
     return affected === 1
   }
 
-  #generateClientId(clientData: CreateClientDto): string {
+  async #generateClientId(clientData: CreateClientDto): Promise<string> {
     let base = clientData.first_name
 
-    base = clientData.second_name
-      ? base.concat(_.capitalize(clientData.second_name))
-      : clientData.last_name
-      ? base.concat(_.capitalize(clientData.last_name))
-      : clientData.age
-      ? base.concat(String(clientData.age))
-      : base.concat(String(Math.floor(Math.random() * 100)))
+    base = base + clientData.last_name + this.#randomIdCode()
+
+    const existingUser: Client = await this.clientRepo.findOneBy({
+      client_id: base
+    })
+
+    if (existingUser) {
+      this.#generateClientId(clientData)
+    }
 
     return base
+  }
+
+  #randomIdCode(): number {
+    return Math.floor(Math.random() * 100)
   }
 }
