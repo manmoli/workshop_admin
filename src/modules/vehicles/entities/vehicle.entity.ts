@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { BranchOffice } from '../../branches/entities/branch.entity'
-import { Client } from '../../clients/entities/client.entity'
+import { Customer } from '../../customers/entities/customers.entity'
 
 export enum Transmission {
   Automatic = 'Automatic',
@@ -37,11 +37,13 @@ export class Vehicle {
   category: string
 
   @Column({ type: 'int', nullable: false })
-  clientId: number
+  customerId: number
 
   @Column({ type: 'varchar', nullable: true, unique: true })
   registration: string
 
-  @ManyToOne(() => Client, (client) => client.vehicles, { nullable: false })
-  client: Client
+  @ManyToOne(() => Customer, (customer) => customer.vehicles, {
+    nullable: false
+  })
+  customer: Customer
 }

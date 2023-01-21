@@ -2,17 +2,17 @@ import { ConfigModule } from '@nestjs/config'
 import { DatabaseModule } from '../../../database/database.module'
 import { environments } from '../../../environments'
 import { joiValidator } from '../../../envValidatorSchema'
-import { ClientsModule } from '../../clients/clients.module'
-import { ClientCheckMiddleware } from './client-check.middleware'
+import { CustomersModule } from '../../customers/customers.module'
 import config from '../../../conf'
 import { Test, TestingModule } from '@nestjs/testing'
 import { EntityNotFoundError, Repository } from 'typeorm'
-import { Client } from '../../clients/entities/client.entity'
+import { Customer } from '../../customers/entities/customers.entity'
 import { getRepositoryToken } from '@nestjs/typeorm'
-import { createClientDto } from '../../../testing/dummies/clients'
+import { createCustomerDto } from '../../../testing/dummies/customers'
+import { CustomerCheckMiddleware } from './client-check.middleware'
 
 describe('ClientCheckMiddleware', () => {
-  let clientRepo: Repository<Client>
+  let clientRepo: Repository<Customer>
   let res: Response
   let req: any
   const next = jest.fn()
@@ -27,10 +27,10 @@ describe('ClientCheckMiddleware', () => {
           validationSchema: joiValidator
         }),
         DatabaseModule,
-        ClientsModule
+        CustomersModule
       ]
     }).compile()
-    clientRepo = module.get<Repository<Client>>(getRepositoryToken(Client))
+    clientRepo = module.get<Repository<Customer>>(getRepositoryToken(Customer))
   })
 
   beforeEach(async () => {
@@ -39,11 +39,11 @@ describe('ClientCheckMiddleware', () => {
   })
 
   it('should call next function', async () => {
-    const clientId: number = (await clientRepo.insert([createClientDto])).raw[0]
-      .id
+    const clientId: number = (await clientRepo.insert([createCustomerDto]))
+      .raw[0].id
     console.log(clientId)
     req = { params: { client_id: `${clientId}` } }
-    const clientMiddleware = new ClientCheckMiddleware(clientRepo)
+    const clientMiddleware = new CustomerCheckMiddleware(clientRepo)
 
     await clientMiddleware.use(req, res, next)
 
@@ -52,7 +52,7 @@ describe('ClientCheckMiddleware', () => {
 
   it('should return not found error', async () => {
     req = { params: { client_id: 0 } }
-    const clientMiddleware = new ClientCheckMiddleware(clientRepo)
+    const clientMiddleware = new CustomerCheckMiddleware(clientRepo)
 
     await expect(clientMiddleware.use(req, res, next)).rejects.toBeInstanceOf(
       EntityNotFoundError

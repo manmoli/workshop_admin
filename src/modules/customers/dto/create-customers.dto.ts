@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 
-export class CreateClientDto {
+export class CreateCustomerDto {
   @IsString()
   @IsNotEmpty()
   first_name: string
@@ -27,7 +27,7 @@ export class CreateClientDto {
 
   @IsString()
   @IsOptional()
-  client_id: string
+  customer_id: string
 
   @IsString()
   @IsOptional()

@@ -3,10 +3,10 @@ import { Person } from '../../common/person.entity'
 import { Vehicle } from '../../vehicles/entities/vehicle.entity'
 
 @Entity()
-export class Client extends Person {
+export class Customer extends Person {
   @Column({ type: 'varchar', unique: true, nullable: false })
-  client_id: string
+  customer_id: string
 
-  @OneToMany(() => Vehicle, (vehicle) => vehicle.client)
+  @OneToMany(() => Vehicle, (vehicle) => vehicle.customer)
   vehicles: Vehicle[]
 }

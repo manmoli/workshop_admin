@@ -5,14 +5,14 @@ import { environments } from '../../../environments'
 import { joiValidator } from '../../../envValidatorSchema'
 import {
   clientsForCreation,
-  createClientDto,
-  createClientDto1,
-  createClientDto3
-} from '../../../testing/dummies/clients'
-import { Client } from '../entities/client.entity'
-import { ClientsService } from './clients.service'
+  createCustomerDto,
+  createCustomerDto1,
+  createCustomerDto3
+} from '../../../testing/dummies/customers'
+import { Customer } from '../entities/customers.entity'
+import { CustomersService } from './customers.service'
 import config from '../../../conf'
-import { ClientsModule } from '../clients.module'
+import { CustomersModule } from '../customers.module'
 import { FindOptions } from '../../../utils/types'
 import {
   EntityNotFoundError,
@@ -23,8 +23,8 @@ import {
 import { getRepositoryToken } from '@nestjs/typeorm'
 
 describe('ClientsService', () => {
-  let clientService: ClientsService
-  let clientRepo: Repository<Client>
+  let clientService: CustomersService
+  let clientRepo: Repository<Customer>
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -36,12 +36,12 @@ describe('ClientsService', () => {
           validationSchema: joiValidator
         }),
         DatabaseModule,
-        ClientsModule
+        CustomersModule
       ]
     }).compile()
 
-    clientService = module.get<ClientsService>(ClientsService)
-    clientRepo = module.get<Repository<Client>>(getRepositoryToken(Client))
+    clientService = module.get<CustomersService>(CustomersService)
+    clientRepo = module.get<Repository<Customer>>(getRepositoryToken(Customer))
   })
 
   beforeEach(async () => {
@@ -49,28 +49,28 @@ describe('ClientsService', () => {
   })
 
   describe('Create', () => {
-    it('should create a client', async () => {
-      const client: Client = await clientService.create(createClientDto)
+    it('should create a customer', async () => {
+      const customer: Customer = await clientService.create(createCustomerDto)
 
-      expect(client).toBeInstanceOf(Client)
-      expect(client).toEqual(expect.objectContaining(createClientDto))
-      expect(client.client_id).toEqual('ManuelMolina')
+      expect(customer).toBeInstanceOf(Customer)
+      expect(customer).toEqual(expect.objectContaining(createCustomerDto))
+      expect(customer.customer_id).toEqual('ManuelMolina')
     })
 
-    it('should create a client with client_id with second name', async () => {
-      const client: Client = await clientService.create(createClientDto1)
+    it('should create a customer with client_id with second name', async () => {
+      const customer: Customer = await clientService.create(createCustomerDto1)
 
-      expect(client).toBeInstanceOf(Client)
-      expect(client).toEqual(expect.objectContaining(createClientDto1))
-      expect(client.client_id).toEqual('ManuelAntonio')
+      expect(customer).toBeInstanceOf(Customer)
+      expect(customer).toEqual(expect.objectContaining(createCustomerDto1))
+      expect(customer.customer_id).toEqual('ManuelAntonio')
     })
 
-    it('should create a client with client_id with age', async () => {
-      const client: Client = await clientService.create(createClientDto3)
+    it('should create a customer with client_id with age', async () => {
+      const customer: Customer = await clientService.create(createCustomerDto3)
 
-      expect(client).toBeInstanceOf(Client)
-      expect(client).toEqual(expect.objectContaining(createClientDto3))
-      expect(client.client_id).toEqual('Roberto31')
+      expect(customer).toBeInstanceOf(Customer)
+      expect(customer).toEqual(expect.objectContaining(createCustomerDto3))
+      expect(customer.customer_id).toEqual('Roberto31')
     })
   })
 
@@ -78,30 +78,30 @@ describe('ClientsService', () => {
     beforeEach(async () => {
       await clientRepo.insert(clientsForCreation)
     })
-    const findOptions: FindOptions<Client> = {
+    const findOptions: FindOptions<Customer> = {
       where: {
         first_name: 'Manuel'
       }
     }
     it('should return all clients with name Manuel', async () => {
-      const clients: Client[] = await clientService.findAll(findOptions)
+      const clients: Customer[] = await clientService.findAll(findOptions)
 
-      expect(clients).toBeInstanceOf(Array<Client>)
+      expect(clients).toBeInstanceOf(Array<Customer>)
       expect(clients).toHaveLength(2)
       expect(clients[0].first_name).toEqual('Manuel')
     })
 
     it('should return all clients', async () => {
-      const clients: Client[] = await clientService.findAll()
+      const clients: Customer[] = await clientService.findAll()
 
-      expect(clients).toBeInstanceOf(Array<Client>)
+      expect(clients).toBeInstanceOf(Array<Customer>)
       expect(clients).toHaveLength(7)
     })
 
     it('should return only three clients', async () => {
-      const clients: Client[] = await clientService.findAll({ take: 3 })
+      const clients: Customer[] = await clientService.findAll({ take: 3 })
 
-      expect(clients).toBeInstanceOf(Array<Client>)
+      expect(clients).toBeInstanceOf(Array<Customer>)
       expect(clients).toHaveLength(3)
     })
   })
@@ -110,19 +110,19 @@ describe('ClientsService', () => {
     let id: number
     beforeEach(async () => {
       const { identifiers } = await clientRepo.insert([
-        createClientDto,
-        createClientDto1
+        createCustomerDto,
+        createCustomerDto1
       ])
       id = identifiers[0].id
     })
 
-    it('should find a client', async () => {
-      const client: Client = await clientService.findOne(id)
+    it('should find a customer', async () => {
+      const customer: Customer = await clientService.findOne(id)
 
-      expect(client).toEqual(expect.objectContaining(createClientDto))
+      expect(customer).toEqual(expect.objectContaining(createCustomerDto))
     })
 
-    it('should fail when no client found', async () => {
+    it('should fail when no customer found', async () => {
       const nonExistingId = 0
 
       await expect(clientService.findOne(nonExistingId)).rejects.toBeInstanceOf(
@@ -135,23 +135,23 @@ describe('ClientsService', () => {
     let id
     const nonExistingTaxId = 'MOPM999999AB2'
     beforeEach(async () => {
-      id = (await clientRepo.insert([createClientDto])).raw[0].id
+      id = (await clientRepo.insert([createCustomerDto])).raw[0].id
     })
 
-    it('should update a client', async () => {
-      const client: Client = await clientService.update(id, {
+    it('should update a customer', async () => {
+      const customer: Customer = await clientService.update(id, {
         tax_id: nonExistingTaxId
       })
 
-      expect(client).toEqual(
+      expect(customer).toEqual(
         expect.objectContaining({
-          ...createClientDto,
+          ...createCustomerDto,
           tax_id: nonExistingTaxId
         })
       )
     })
 
-    it('should return not found error when the client does not exists', async () => {
+    it('should return not found error when the customer does not exists', async () => {
       const nonExistingId = 0
 
       await expect(
@@ -160,10 +160,10 @@ describe('ClientsService', () => {
     })
 
     it('should fail because violates the unique tax id constraint', async () => {
-      const id = (await clientRepo.insert([createClientDto1])).raw[0].id
+      const id = (await clientRepo.insert([createCustomerDto1])).raw[0].id
 
       await expect(
-        clientService.update(id, { tax_id: createClientDto.tax_id })
+        clientService.update(id, { tax_id: createCustomerDto.tax_id })
       ).rejects.toBeInstanceOf(QueryFailedError)
     })
 
@@ -177,16 +177,16 @@ describe('ClientsService', () => {
   describe('remove', () => {
     let id
     beforeEach(async () => {
-      id = (await clientRepo.insert([createClientDto])).raw[0].id
+      id = (await clientRepo.insert([createCustomerDto])).raw[0].id
     })
 
-    it('should remove a client', async () => {
+    it('should remove a customer', async () => {
       const removed: boolean = await clientService.remove(id)
 
       expect(removed).toBe(true)
     })
 
-    it('should fails when client not found', async () => {
+    it('should fails when customer not found', async () => {
       const nonExistingId = 0
 
       expect(clientService.remove(nonExistingId)).rejects.toBeInstanceOf(

@@ -12,12 +12,12 @@ import { environments } from './environments'
 import { DatabaseModule } from './database/database.module'
 import config from './conf'
 import { joiValidator } from './envValidatorSchema'
-import { ClientsModule } from './modules/clients/clients.module'
+import { CustomersModule } from './modules/customers/customers.module'
 import { VehiclesModule } from './modules/vehicles/vehicles.module'
-import { vehicleRouteTree } from './modules/vehicles/routes'
 import { RouterModule } from '@nestjs/core'
-import { ClientCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
-import { MechanicsModule } from './modules/mechanics/mechanics.module';
+import { MechanicsModule } from './modules/mechanics/mechanics.module'
+import { AdministratorsModule } from './modules/administrators/administrators.module'
+import { CustomerCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
 
 @Module({
   imports: [
@@ -30,31 +30,32 @@ import { MechanicsModule } from './modules/mechanics/mechanics.module';
     BranchModule,
     DepartmentsModule,
     DatabaseModule,
-    ClientsModule,
+    CustomersModule,
     VehiclesModule,
     RouterModule.register([
       {
-        path: 'clients',
-        module: ClientsModule,
+        path: 'customers',
+        module: CustomersModule,
         children: [
           {
-            path: '/:client_id/vehicles',
+            path: '/:customer_id/vehicles',
             module: VehiclesModule
           }
         ]
       }
     ]),
-    MechanicsModule
+    MechanicsModule,
+    AdministratorsModule
   ]
 })
 export class AppModule implements NestModule {
   constructor(private dataSource: DataSource) {}
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(ClientCheckMiddleware)
+      .apply(CustomerCheckMiddleware)
       .forRoutes(
-        { path: 'clients/:client_id/vehicles', method: RequestMethod.POST },
-        { path: 'clients/:client_id/vehicles', method: RequestMethod.GET }
+        { path: 'customers/:customer_id/vehicles', method: RequestMethod.POST },
+        { path: 'customers/:customer_id/vehicles', method: RequestMethod.GET }
       )
   }
 }

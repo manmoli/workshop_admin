@@ -10,7 +10,7 @@ import {
   vehicle2,
   vehiclesArray
 } from '../../../testing/dummies/vehicles'
-import { updatedSpecificClient } from '../../../testing/dummies/clients'
+import { updatedSpecificClient } from '../../../testing/dummies/customers'
 import { FindOptions } from '../../../utils/types'
 
 describe('VehiclesController', () => {
@@ -49,7 +49,7 @@ describe('VehiclesController', () => {
     })
   })
 
-  it('should get all vehicles from a client', async () => {
+  it('should get all vehicles from a customer', async () => {
     const findOptions: FindOptions<Vehicle> = {
       take: 10,
       where: {

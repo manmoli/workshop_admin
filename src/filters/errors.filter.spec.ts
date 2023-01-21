@@ -1,7 +1,7 @@
-import { HttpExceptionFilter } from './errors.filter'
+import { TypeORMErrorFilter } from './errors.filter'
 
 describe('ErrorsFilter', () => {
   it('should be defined', () => {
-    expect(new HttpExceptionFilter()).toBeDefined()
+    expect(new TypeORMErrorFilter()).toBeDefined()
   })
 })

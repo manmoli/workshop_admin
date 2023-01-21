@@ -3,22 +3,22 @@ import { getRepositoryToken } from '@nestjs/typeorm'
 import { EntityNotFoundError, QueryFailedError, Repository } from 'typeorm'
 import { AppModule } from '../../../app.module'
 import {
-  createClientDto,
-  createClientDto1
-} from '../../../testing/dummies/clients'
+  createCustomerDto,
+  createCustomerDto1
+} from '../../../testing/dummies/customers'
 import {
   createVehicleDto,
   updateVehicleDto,
   vehiclesArray
 } from '../../../testing/dummies/vehicles'
-import { Client } from '../../clients/entities/client.entity'
+import { Customer } from '../../customers/entities/customers.entity'
 import { Vehicle } from '../entities/vehicle.entity'
 import { VehiclesService } from './vehicles.service'
 
 describe('VehiclesService', () => {
   let vehiclesService: VehiclesService
   let vehicleRepo: Repository<Vehicle>
-  let clientRepo: Repository<Client>
+  let clientRepo: Repository<Customer>
   let clientId: number
   let clientId2: number
   let vehicleId: number
@@ -31,7 +31,7 @@ describe('VehiclesService', () => {
 
     vehiclesService = module.get<VehiclesService>(VehiclesService)
     vehicleRepo = module.get<Repository<Vehicle>>(getRepositoryToken(Vehicle))
-    clientRepo = module.get<Repository<Client>>(getRepositoryToken(Client))
+    clientRepo = module.get<Repository<Customer>>(getRepositoryToken(Customer))
   })
 
   beforeEach(async () => {
@@ -39,8 +39,8 @@ describe('VehiclesService', () => {
     await clientRepo.delete({})
 
     const { identifiers } = await clientRepo.insert([
-      createClientDto,
-      createClientDto1
+      createCustomerDto,
+      createCustomerDto1
     ])
     clientId = identifiers[0].id
     clientId2 = identifiers[1].id
@@ -84,17 +84,19 @@ describe('VehiclesService', () => {
       expect(vehicles.length).toEqual(4)
     })
 
-    it('should return all vehicles from a client', async () => {
-      const vehicles = await vehiclesService.findAll({ where: { clientId } })
+    it('should return all vehicles from a customer', async () => {
+      const vehicles = await vehiclesService.findAll({
+        where: { customerId: clientId }
+      })
 
       expect(vehicles).toBeInstanceOf(Array<Vehicle>)
       expect(vehicles.length).toEqual(3)
     })
 
-    it('should return 2 vehicles from a client', async () => {
+    it('should return 2 vehicles from a customer', async () => {
       const vehicles = await vehiclesService.findAll({
         take: 2,
-        where: { clientId }
+        where: { customerId: clientId }
       })
 
       expect(vehicles).toBeInstanceOf(Array<Vehicle>)
