@@ -39,10 +39,9 @@ describe('ClientCheckMiddleware', () => {
   })
 
   it('should call next function', async () => {
-    const clientId: number = (await clientRepo.insert([createCustomerDto]))
+    const customer_id: number = (await clientRepo.insert([createCustomerDto]))
       .raw[0].id
-    console.log(clientId)
-    req = { params: { client_id: `${clientId}` } }
+    req = { params: { client_id: `${customer_id}` } }
     const clientMiddleware = new CustomerCheckMiddleware(clientRepo)
 
     await clientMiddleware.use(req, res, next)

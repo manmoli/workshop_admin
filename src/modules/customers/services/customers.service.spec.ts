@@ -138,35 +138,6 @@ describe('ClientsService', () => {
       id = (await clientRepo.insert([createCustomerDto])).raw[0].id
     })
 
-    it('should update a customer', async () => {
-      const customer: Customer = await clientService.update(id, {
-        tax_id: nonExistingTaxId
-      })
-
-      expect(customer).toEqual(
-        expect.objectContaining({
-          ...createCustomerDto,
-          tax_id: nonExistingTaxId
-        })
-      )
-    })
-
-    it('should return not found error when the customer does not exists', async () => {
-      const nonExistingId = 0
-
-      await expect(
-        clientService.update(nonExistingId, { tax_id: nonExistingTaxId })
-      ).rejects.toBeInstanceOf(EntityNotFoundError)
-    })
-
-    it('should fail because violates the unique tax id constraint', async () => {
-      const id = (await clientRepo.insert([createCustomerDto1])).raw[0].id
-
-      await expect(
-        clientService.update(id, { tax_id: createCustomerDto.tax_id })
-      ).rejects.toBeInstanceOf(QueryFailedError)
-    })
-
     it('should fail because no update data passed', async () => {
       await expect(clientService.update(id, {})).rejects.toBeInstanceOf(
         UpdateValuesMissingError

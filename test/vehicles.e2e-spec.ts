@@ -21,7 +21,7 @@ describe('AppController (e2e)', () => {
   let app: INestApplication
   let clientRepo: Repository<Customer>
   let vehicleRepo: Repository<Vehicle>
-  let clientId: number
+  let customer_id: number
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -42,14 +42,14 @@ describe('AppController (e2e)', () => {
   beforeEach(async () => {
     await clientRepo.delete({})
     const { identifiers } = await clientRepo.insert([createCustomerDto])
-    clientId = identifiers[0].id
-    await vehicleRepo.insert([{ ...createVehicleDto, customerId: clientId }])
+    customer_id = identifiers[0].id
+    await vehicleRepo.insert([{ ...createVehicleDto, customerId: customer_id }])
   })
 
   describe('/ (GET)', () => {
     it('should return all vehicles from a customer', async () => {
       const response: request.Response = await request(app.getHttpServer())
-        .get(`/clients/${clientId}/vehicles`)
+        .get(`/clients/${customer_id}/vehicles`)
         .expect(200)
 
       expect(response.statusCode).toEqual(200)

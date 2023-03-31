@@ -13,7 +13,6 @@ export class VehiclesService {
     @InjectRepository(Vehicle) private vehicleRepo: Repository<Vehicle>
   ) {}
   create(createVehicleDto: CreateVehicleDto) {
-    console.log(createVehicleDto)
     const createdVehicle: Vehicle = this.vehicleRepo.create(createVehicleDto)
 
     return this.vehicleRepo.save(createdVehicle)

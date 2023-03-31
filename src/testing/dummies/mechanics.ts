@@ -8,14 +8,12 @@ export const createMechanicDto: CreateMechanicDto = {
   last_name: 'LaV',
   age: 31,
   image_url: '',
-  tax_id: 'MOPM910802HF2',
   phone_number: '9994477040'
 }
 
 export const updatedMechanicDto: UpdateMechanicDto = {
   second_name: 'ah',
-  last_name: 'YaSé',
-  tax_id: 'MOPM910802HF2'
+  last_name: 'YaSé'
 }
 
 export const mechanic1: Mechanic = new Mechanic()
@@ -24,7 +22,6 @@ mechanic1.second_name = 'Sepa'
 mechanic1.last_name = 'LaV'
 mechanic1.age = 31
 mechanic1.image_url = ''
-mechanic1.tax_id = 'MOPM910802HF2'
 mechanic1.services = []
 mechanic1.employeeId = 'fgadfggg'
 
@@ -34,7 +31,6 @@ mechanic1.second_name = 'N'
 mechanic1.last_name = 'mms'
 mechanic1.age = 31
 mechanic1.image_url = ''
-mechanic1.tax_id = 'MOPM910802Hsadf2'
 mechanic1.services = []
 mechanic1.employeeId = 'hdfhagag'
 
@@ -44,7 +40,6 @@ mechanic1.second_name = 'Sefasdfpa'
 mechanic1.last_name = 'LaadsfadsV'
 mechanic1.age = 31
 mechanic1.image_url = ''
-mechanic1.tax_id = 'dsgfa'
 mechanic1.services = []
 mechanic1.employeeId = 'dfasdgasdgah'
 

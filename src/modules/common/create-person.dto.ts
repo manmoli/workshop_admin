@@ -21,10 +21,6 @@ export class CreatePersonDto {
   @IsOptional()
   image_url: string
 
-  @IsString()
-  @IsOptional()
-  tax_id: string
-
   @IsPhoneNumber()
   phone_number: string
 }

@@ -21,10 +21,13 @@ export class VehiclesController {
 
   @Post()
   create(
-    @Param('clientId') clientId: number,
+    @Param('customer_id') customer_id: string,
     @Body() createVehicleDto: CreateVehicleDto
   ) {
-    return this.vehiclesService.create({ ...createVehicleDto, clientId })
+    return this.vehiclesService.create({
+      ...createVehicleDto,
+      customerId: +customer_id
+    })
   }
 
   @Get()

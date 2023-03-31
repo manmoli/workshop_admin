@@ -16,7 +16,7 @@ import { FindOptions } from '../../../utils/types'
 describe('VehiclesController', () => {
   let vehiclesController: VehiclesController
   let vehiclesSpyService: VehiclesService
-  const clientId = 1
+  const customerId = 1
   const vehicleId = 234
 
   beforeAll(async () => {
@@ -40,12 +40,15 @@ describe('VehiclesController', () => {
   })
 
   it('should create a vehicle', async () => {
-    const vehicle = await vehiclesController.create(clientId, createVehicleDto)
+    const vehicle = await vehiclesController.create(
+      String(customerId),
+      createVehicleDto
+    )
 
     expect(vehicle).toBeInstanceOf(Vehicle)
     expect(vehiclesSpyService.create).toHaveBeenCalledWith({
       ...createVehicleDto,
-      clientId
+      customerId
     })
   })
 

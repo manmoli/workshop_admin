@@ -19,17 +19,19 @@ export class CreateCustomerDto {
 
   @IsString()
   @IsOptional()
-  image_url: string
-
-  @IsString()
-  @IsOptional()
-  tax_id: string
-
-  @IsString()
-  @IsOptional()
   customer_id: string
 
   @IsString()
   @IsOptional()
   phone_number: string
+
+  @IsString()
+  @IsOptional()
+  image_url: string
+}
+
+export class CreateCustomerWIthImageDto extends CreateCustomerDto {
+  @IsString()
+  @IsOptional()
+  photo: string
 }

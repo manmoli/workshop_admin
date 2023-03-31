@@ -1,10 +1,10 @@
-import { IsDate, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
 import { Transmission } from '../entities/vehicle.entity'
 
 export class CreateVehicleDto {
   @IsOptional()
-  @IsDate()
-  modelDate: Date
+  @IsNumber()
+  model_year: number
 
   @IsOptional()
   @IsString()
@@ -15,10 +15,10 @@ export class CreateVehicleDto {
 
   @IsOptional()
   @IsString()
-  vehicleEngine: string
+  vehicle_engine: string
 
   @IsEnum(Transmission)
-  vehicleTransmission: Transmission
+  vehicle_transmission: Transmission
 
   @IsOptional()
   @IsString()
@@ -26,16 +26,20 @@ export class CreateVehicleDto {
 
   @IsOptional()
   @IsNumber()
-  numberOfDoors: number
+  number_of_doors: number
 
   @IsString()
   category: string
 
   @IsNumber()
   @IsOptional()
-  clientId: number
+  customerId: number
 
   @IsString()
   @IsOptional()
-  registration: string
+  license_plate: string
+
+  @IsString()
+  @IsOptional()
+  vin: string
 }

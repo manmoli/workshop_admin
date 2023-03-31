@@ -28,8 +28,6 @@ export class AdministratorsService {
     )
     await this.administratorRepo.save(administrator)
 
-    console.log(administrator)
-
     return administrator
   }
 

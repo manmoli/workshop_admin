@@ -1,4 +1,4 @@
-import { CreateCustomerDto } from '../../modules/customers/dto/create-customers.dto'
+import { CreateCustomerDto, CreateCustomerWIthImageDto } from '../../modules/customers/dto/create-customers.dto'
 import { Customer } from '../../modules/customers/entities/customers.entity'
 
 export const createCustomerDto: CreateCustomerDto = {
@@ -7,14 +7,23 @@ export const createCustomerDto: CreateCustomerDto = {
   last_name: 'Molina',
   age: 31,
   image_url: 'dsoiuasd93fd',
-  tax_id: 'MOPM910802HF2',
   customer_id: '',
   phone_number: '8172381723'
 }
 
+export const createCustomerDtoWPhoto: CreateCustomerWIthImageDto = {
+  first_name: 'Manuel',
+  second_name: '',
+  last_name: 'Molina',
+  age: 31,
+  image_url: 'dsoiuasd93fd',
+  customer_id: '',
+  phone_number: '8172381723',
+  photo: null
+}
+
 export const createCustomerDto1: CreateCustomerDto = {
   ...createCustomerDto,
-  tax_id: 'MOPM910802HF1',
   image_url: 'dsoiuasdf',
   first_name: 'Manuel',
   second_name: 'Antonio',
@@ -22,14 +31,12 @@ export const createCustomerDto1: CreateCustomerDto = {
 }
 export const createCustomerDto2: CreateCustomerDto = {
   ...createCustomerDto,
-  tax_id: 'MOPM910802HF3',
   image_url: 'dsoiu',
   first_name: 'Ricardo',
   customer_id: '234dsf'
 }
 export const createCustomerDto3: CreateCustomerDto = {
   ...createCustomerDto,
-  tax_id: 'MOPM910802HF4',
   image_url: '8923',
   last_name: '',
   first_name: 'Roberto',
@@ -37,21 +44,18 @@ export const createCustomerDto3: CreateCustomerDto = {
 }
 export const createCustomerDto4: CreateCustomerDto = {
   ...createCustomerDto,
-  tax_id: 'MOPM910802HF5',
   image_url: 'djhf',
   first_name: 'Lina',
   customer_id: '324sdaf'
 }
 export const createCustomerDto5: CreateCustomerDto = {
   ...createCustomerDto,
-  tax_id: 'MOPM910802HF6',
   image_url: 'jads',
   first_name: 'Alfredo',
   customer_id: '2134dsaf'
 }
 export const createCustomerDto6: CreateCustomerDto = {
   ...createCustomerDto,
-  tax_id: 'MOPM910802HF7',
   image_url: 'adsf',
   first_name: 'Evelyn',
   customer_id: '23dfg'

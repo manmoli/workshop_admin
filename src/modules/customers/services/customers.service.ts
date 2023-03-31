@@ -13,7 +13,7 @@ export class CustomersService {
     @InjectRepository(Customer) private customerRepo: Repository<Customer>
   ) {}
   async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
-    createCustomerDto.customer_id = await this.#generateCustomerId(
+    createCustomerDto.customer_id = await this.#generatecustomer_id(
       createCustomerDto
     )
     const customer: Customer = await this.customerRepo.create(createCustomerDto)
@@ -26,6 +26,36 @@ export class CustomersService {
     const customers: Customer[] = await this.customerRepo.find(findOptions)
 
     return customers
+  }
+
+  async findAllWithVehicles(
+    findOptions?: FindOptions<Customer>
+  ): Promise<Customer[]> {
+    try {
+      const query = this.customerRepo
+        .createQueryBuilder('customer')
+        .leftJoinAndSelect(
+          'customer.vehicles',
+          'vehicle',
+          'vehicle.customerId = customer.id'
+        )
+        .select(['customer', 'vehicle.model', 'vehicle.brand'])
+        .take(findOptions?.take)
+        .skip(findOptions?.skip)
+
+      if (findOptions.where?.first_name) {
+        query.where(
+          'customer.first_name LIKE :searchTerm OR customer.last_name LIKE :searchTerm',
+          { searchTerm: `%${findOptions.where.first_name}%` }
+        )
+      }
+
+      const customers = await query.getMany()
+
+      return customers
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async findOne(id: number): Promise<Customer> {
@@ -63,7 +93,7 @@ export class CustomersService {
     return affected === 1
   }
 
-  async #generateCustomerId(customerData: CreateCustomerDto): Promise<string> {
+  async #generatecustomer_id(customerData: CreateCustomerDto): Promise<string> {
     let base = customerData.first_name
 
     base = base + customerData.last_name + this.#randomIdCode()
@@ -73,7 +103,7 @@ export class CustomersService {
     })
 
     if (existingUser) {
-      this.#generateCustomerId(customerData)
+      this.#generatecustomer_id(customerData)
     }
 
     return base

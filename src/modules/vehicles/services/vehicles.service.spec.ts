@@ -19,10 +19,10 @@ describe('VehiclesService', () => {
   let vehiclesService: VehiclesService
   let vehicleRepo: Repository<Vehicle>
   let clientRepo: Repository<Customer>
-  let clientId: number
-  let clientId2: number
+  let customer_id: number
+  let customer_id2: number
   let vehicleId: number
-  let vehiclesWithClientId
+  let vehiclesWithcustomer_id
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -42,16 +42,16 @@ describe('VehiclesService', () => {
       createCustomerDto,
       createCustomerDto1
     ])
-    clientId = identifiers[0].id
-    clientId2 = identifiers[1].id
-    createVehicleDto.clientId = clientId
-    vehiclesWithClientId = vehiclesArray.map((v) => ({
+    customer_id = identifiers[0].id
+    customer_id2 = identifiers[1].id
+    createVehicleDto.customerId = customer_id
+    vehiclesWithcustomer_id = vehiclesArray.map((v) => ({
       ...v,
-      clientId
+      customer_id
     }))
-    vehiclesWithClientId[0].clientId = clientId2
-    vehicleId = (await vehicleRepo.insert(vehiclesWithClientId)).identifiers[0]
-      .id
+    vehiclesWithcustomer_id[0].customer_id = customer_id2
+    vehicleId = (await vehicleRepo.insert(vehiclesWithcustomer_id))
+      .identifiers[0].id
   })
 
   describe('create vehicle', () => {
@@ -62,15 +62,15 @@ describe('VehiclesService', () => {
       expect(vehicle).toEqual(expect.objectContaining(createVehicleDto))
     })
 
-    it('should throw Vehicle already exists error when the registration is already in db', async () => {
+    it('should throw Vehicle already exists error when the license_plate is already in db', async () => {
       await vehicleRepo.insert([
-        { ...createVehicleDto, registration: 'existing' }
+        { ...createVehicleDto, license_plate: 'existing' }
       ])
 
       await expect(
         vehiclesService.create({
           ...createVehicleDto,
-          registration: 'existing'
+          license_plate: 'existing'
         })
       ).rejects.toBeInstanceOf(QueryFailedError)
     })
@@ -86,7 +86,7 @@ describe('VehiclesService', () => {
 
     it('should return all vehicles from a customer', async () => {
       const vehicles = await vehiclesService.findAll({
-        where: { customerId: clientId }
+        where: { customerId: customer_id }
       })
 
       expect(vehicles).toBeInstanceOf(Array<Vehicle>)
@@ -96,7 +96,7 @@ describe('VehiclesService', () => {
     it('should return 2 vehicles from a customer', async () => {
       const vehicles = await vehiclesService.findAll({
         take: 2,
-        where: { customerId: clientId }
+        where: { customerId: customer_id }
       })
 
       expect(vehicles).toBeInstanceOf(Array<Vehicle>)
@@ -136,14 +136,14 @@ describe('VehiclesService', () => {
         vehiclesService.update(nonExistingId, updateVehicleDto)
       ).rejects.toBeInstanceOf(EntityNotFoundError)
     })
-    it('should return entity already exists when the registration already exists', async () => {
+    it('should return entity already exists when the license_plate already exists', async () => {
       await vehicleRepo.insert({
-        ...vehiclesWithClientId[0],
-        registration: 'newOne'
+        ...vehiclesWithcustomer_id[0],
+        license_plate: 'newOne'
       })
 
       await expect(
-        vehiclesService.update(vehicleId, { registration: 'newOne' })
+        vehiclesService.update(vehicleId, { license_plate: 'newOne' })
       ).rejects.toBeInstanceOf(QueryFailedError)
     })
   })
