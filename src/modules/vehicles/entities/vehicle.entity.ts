@@ -3,8 +3,8 @@ import { BranchOffice } from '../../branches/entities/branch.entity'
 import { Customer } from '../../customers/entities/customers.entity'
 
 export enum Transmission {
-  Automatic = 'Automatic',
-  Manual = 'Manual'
+  Automatic = 'automatic',
+  Manual = 'manual'
 }
 
 @Entity()

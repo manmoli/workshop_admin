@@ -29,6 +29,7 @@ export class CreateVehicleDto {
   number_of_doors: number
 
   @IsString()
+  @IsOptional()
   category: string
 
   @IsNumber()

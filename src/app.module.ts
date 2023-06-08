@@ -18,6 +18,7 @@ import { RouterModule } from '@nestjs/core'
 import { MechanicsModule } from './modules/mechanics/mechanics.module'
 import { AdministratorsModule } from './modules/administrators/administrators.module'
 import { CustomerCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
+import { ParseNumericMiddleware } from './modules/vehicles/middlewares/parse-numeric.middeware'
 
 @Module({
   imports: [
@@ -52,7 +53,7 @@ export class AppModule implements NestModule {
   constructor(private dataSource: DataSource) {}
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(CustomerCheckMiddleware)
+      .apply(CustomerCheckMiddleware, ParseNumericMiddleware)
       .forRoutes(
         { path: 'customers/:customer_id/vehicles', method: RequestMethod.POST },
         { path: 'customers/:customer_id/vehicles', method: RequestMethod.GET }
