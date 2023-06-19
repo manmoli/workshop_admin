@@ -15,8 +15,7 @@ import { joiValidator } from './envValidatorSchema'
 import { CustomersModule } from './modules/customers/customers.module'
 import { VehiclesModule } from './modules/vehicles/vehicles.module'
 import { RouterModule } from '@nestjs/core'
-import { MechanicsModule } from './modules/mechanics/mechanics.module'
-import { AdministratorsModule } from './modules/administrators/administrators.module'
+import { UserModule } from './modules/users/users.module'
 import { CustomerCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
 import { ParseNumericMiddleware } from './modules/vehicles/middlewares/parse-numeric.middeware'
 
@@ -45,8 +44,7 @@ import { ParseNumericMiddleware } from './modules/vehicles/middlewares/parse-num
         ]
       }
     ]),
-    MechanicsModule,
-    AdministratorsModule
+    UserModule
   ]
 })
 export class AppModule implements NestModule {
