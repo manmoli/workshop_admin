@@ -51,7 +51,7 @@ export class AppModule implements NestModule {
   constructor(private dataSource: DataSource) {}
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(CustomerCheckMiddleware, ParseNumericMiddleware)
+      .apply(CustomerCheckMiddleware)
       .forRoutes(
         { path: 'customers/:customer_id/vehicles', method: RequestMethod.POST },
         { path: 'customers/:customer_id/vehicles', method: RequestMethod.GET }

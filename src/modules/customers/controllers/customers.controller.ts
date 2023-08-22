@@ -8,8 +8,7 @@ import {
   HttpCode,
   UsePipes,
   Put,
-  Query,
-  UseInterceptors
+  Query
 } from '@nestjs/common'
 import { CustomersService } from '../services/customers.service'
 import {
@@ -20,13 +19,13 @@ import { UpdateCustomerDto } from '../dto/update-customers.dto'
 import { FindOptions } from '../../../utils/types'
 import { Customer } from '../entities/customers.entity'
 import { EmptyStringToNull } from '../../../pipes/emptyStringToNull'
-import { FileInterceptor } from '@nestjs/platform-express'
+import { ParseNumericPipe } from '../../../pipes/parseNumericString'
 
 @Controller()
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
-  @UsePipes(new EmptyStringToNull())
+  @UsePipes(new EmptyStringToNull(), new ParseNumericPipe())
   @Post()
   create(@Body() createCustomerDto: CreateCustomerWIthImageDto) {
     const customerDtoObject = new CreateCustomerDto()
@@ -36,6 +35,7 @@ export class CustomersController {
     return this.customersService.create(customerDtoObject)
   }
 
+  @UsePipes(new ParseNumericPipe())
   @Get()
   findAll(@Query() findOptions: FindOptions<Customer>) {
     return this.customersService.findAllWithVehicles(findOptions)

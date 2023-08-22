@@ -7,13 +7,15 @@ import {
   Param,
   Delete,
   Query,
-  HttpCode
+  HttpCode,
+  UsePipes
 } from '@nestjs/common'
 import { VehiclesService } from '../services/vehicles.service'
 import { CreateVehicleDto } from '../dto/create-vehicle.dto'
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto'
 import { FindOptions } from '../../../utils/types'
 import { Vehicle } from '../entities/vehicle.entity'
+import { ParseNumericPipe } from '../../../pipes/parseNumericString'
 
 @Controller()
 export class VehiclesController {
@@ -22,7 +24,7 @@ export class VehiclesController {
   @Post()
   create(
     @Param('customer_id') customer_id: string,
-    @Body() createVehicleDto: CreateVehicleDto
+    @Body(new ParseNumericPipe()) createVehicleDto: CreateVehicleDto
   ) {
     return this.vehiclesService.create({
       ...createVehicleDto,

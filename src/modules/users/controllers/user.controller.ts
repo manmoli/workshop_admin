@@ -3,50 +3,55 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
+  UsePipes,
   HttpCode,
-  UsePipes
+  Query,
+  ParseIntPipe
 } from '@nestjs/common'
+
+import { FindOptions } from '../../../utils/types'
+import { EmptyStringToNull } from '../../../pipes/emptyStringToNull'
+import { ParseNumericPipe } from '../../../pipes/parseNumericString'
 import { UsersService } from '../services/users.service'
 import { CreateUserDto } from '../dto/create-user.dto'
-import { UpdateUserDto } from '../dto/update-user.dto'
-import { FindOptions } from '../../../utils/types'
 import { User } from '../entities/users.entity'
-import { EmptyStringToNull } from '../../../pipes/emptyStringToNull'
+import { UpdateUserDto } from '../dto/update-user.dto'
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly userService: UsersService) {}
 
-  @UsePipes(new EmptyStringToNull())
+  @UsePipes(new EmptyStringToNull(), new ParseNumericPipe())
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto)
+    return this.userService.create(createUserDto)
   }
 
+  @UsePipes(new ParseNumericPipe())
   @Get()
-  findAll(findOptions: FindOptions<User>) {
-    return this.usersService.findAll(findOptions)
+  findAll(@Query() findOptions: FindOptions<User>) {
+    return this.userService.findAll(findOptions)
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Promise<User> {
-    return this.usersService.findOne(id)
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
+    return this.userService.findOne(id)
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(
-    @Param('id') id: number,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto
   ): Promise<User> {
-    return this.usersService.update(id, updateUserDto)
+    return this.userService.update(id, updateUserDto)
   }
 
   @HttpCode(204)
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.usersService.remove(id)
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.remove(id)
   }
 }

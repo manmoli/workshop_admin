@@ -23,7 +23,20 @@ export class CustomersService {
   }
 
   async findAll(findOptions?: FindOptions<Customer>): Promise<Customer[]> {
-    const customers: Customer[] = await this.customerRepo.find(findOptions)
+    const query = this.customerRepo.createQueryBuilder('customer')
+    if (findOptions?.where?.first_name) {
+      query
+        .where('customer.first_name ILIKE :term1', {
+          term1: `%${findOptions.where.first_name}%`
+        })
+        .orWhere('customer.second_name ILIKE :term2', {
+          term2: `%${findOptions.where.first_name}%`
+        })
+        .orWhere('customer.last_name ILIKE :term3', {
+          term3: `%${findOptions.where.first_name}%`
+        })
+    }
+    const customers: Customer[] = await query.getMany()
 
     return customers
   }
