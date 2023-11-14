@@ -17,7 +17,7 @@ import { VehiclesModule } from './modules/vehicles/vehicles.module'
 import { RouterModule } from '@nestjs/core'
 import { UserModule } from './modules/users/users.module'
 import { CustomerCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
-import { ParseNumericMiddleware } from './modules/vehicles/middlewares/parse-numeric.middeware'
+import { AppointmentsModule } from './modules/appointments/appointments.module';
 
 @Module({
   imports: [
@@ -44,7 +44,8 @@ import { ParseNumericMiddleware } from './modules/vehicles/middlewares/parse-num
         ]
       }
     ]),
-    UserModule
+    UserModule,
+    AppointmentsModule
   ]
 })
 export class AppModule implements NestModule {
