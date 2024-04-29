@@ -1,0 +1,74 @@
+{
+  "Comprobante": {
+    "Version": "4.0",
+    "Fecha": "2024-03-01T05:43:51",
+    "NoCertificado": "00001000000504465028",
+    "SubTotal": "4500.00",
+    "Descuento": "0.00",
+    "Moneda": "MXN",
+    "Total": "5220.00",
+    "TipoDeComprobante": "E",
+    "FormaPago": "01",
+    "MetodoPago": "PUE",
+    "Exportacion": "01",
+    "LugarExpedicion": "26015",
+    "CfdiRelacionados": {
+      "TipoRelacion": "07",
+      "CfdiRelacionado": ["FFFFFFFF-0559-419E-B9FD-D06FF4EF9CAB"]
+    },
+    "Emisor": {
+      "Rfc": "MOPM910802HF2",
+      "Nombre": "Manuel Molina Peña",
+      "RegimenFiscal": "626"
+    },
+    "Receptor": {
+      "Rfc": "XAXX010101000",
+      "Nombre": "XENON INDUSTRIAL ARTICLES",
+      "UsoCFDI": "G03",
+      "DomicilioFiscalReceptor": "26015",
+      "RegimenFiscalReceptor": "616",
+      "UsoCFDI": "S01"
+    },
+    "Conceptos": [
+      {
+        "ClaveProdServ": "84111506",
+        "Cantidad": "1.0",
+        "ClaveUnidad": "ACT",
+        "Unidad": "Actividad",
+        "Descripcion": "NOTA DE CREDITO POR APLICACION DE ANTICIPO FACT: 679151",
+        "ValorUnitario": "4500.00",
+        "Importe": "4500.00",
+        "Descuento": "0.00",
+        "ObjetoImp": "02",
+        "Impuestos": {
+          "Traslados": [
+            {
+              "Base": "4500.00",
+              "Impuesto": "002",
+              "TipoFactor": "Tasa",
+              "TasaOCuota": "0.160000",
+              "Importe": "720.00"
+            }
+          ]
+        }
+      }
+    ],
+    "Impuestos": {
+      "TotalImpuestosTrasladados": "720.00",
+      "Traslados": [
+        {
+          "Base": "4500.00",
+          "Impuesto": "002",
+          "TipoFactor": "Tasa",
+          "TasaOCuota": "0.160000",
+          "Importe": "720.00"
+        }
+      ]
+    }
+  },
+  "CamposPDF": {
+    "tipoComprobante": "NOTA DE CRÉDITO",
+    "Comentarios": "Ninguno"
+  },
+  "logo": ""
+}

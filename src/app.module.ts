@@ -18,6 +18,7 @@ import { RouterModule } from '@nestjs/core'
 import { UserModule } from './modules/users/users.module'
 import { CustomerCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
 import { AppointmentsModule } from './modules/appointments/appointments.module';
+import { BillingInfoModule } from './billing_info/billing_info.module';
 
 @Module({
   imports: [
@@ -45,7 +46,8 @@ import { AppointmentsModule } from './modules/appointments/appointments.module';
       }
     ]),
     UserModule,
-    AppointmentsModule
+    AppointmentsModule,
+    BillingInfoModule
   ]
 })
 export class AppModule implements NestModule {
