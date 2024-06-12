@@ -19,7 +19,7 @@ import { ParseNumericPipe } from '../../../pipes/parseNumericString'
 
 @Controller()
 export class VehiclesController {
-  constructor(private readonly vehiclesService: VehiclesService) {}
+  constructor(private readonly vehiclesService: VehiclesService) { }
 
   @Post()
   create(
@@ -33,8 +33,11 @@ export class VehiclesController {
   }
 
   @Get()
-  findAll(@Query() findOptions: FindOptions<Vehicle>) {
-    return this.vehiclesService.findAll(findOptions)
+  findAll(
+    @Param('customer_id') customer_id: number,
+    @Query() findOptions: FindOptions<Vehicle>
+  ) {
+    return this.vehiclesService.findAll(customer_id ? { where: { customerId: customer_id } } : findOptions)
   }
 
   @Get(':id')

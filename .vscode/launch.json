@@ -13,7 +13,7 @@
       ],
       "program": "${workspaceFolder}/src/main.ts",
       "preLaunchTask": "tsc: build - tsconfig.json",
-      "runtimeExecutable": "/home/manuel.molina/.nvm/versions/node/v18.13.0/bin/node",
+      "runtimeExecutable": "/home/manuel/.nvm/versions/node/v20.12.2/bin/node",
       "outFiles": [
         "${workspaceFolder}/dist/**/*.js"
       ]
