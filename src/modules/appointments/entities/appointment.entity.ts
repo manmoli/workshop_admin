@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { Customer } from '../../customers/entities/customers.entity'
+import { Vehicle } from '../../vehicles/entities/vehicle.entity'
 
 @Entity()
 export class Appointment {
@@ -13,6 +14,12 @@ export class Appointment {
     onDelete: 'CASCADE'
   })
   customer: Customer
+
+  @Column({ type: 'int', nullable: true })
+  vehicleId: number
+
+  @ManyToOne(() => Vehicle, (vehicle) => vehicle.appointments, {})
+  vehicle: Vehicle
 
   @Column({ type: 'date', nullable: false })
   dateIn: Date

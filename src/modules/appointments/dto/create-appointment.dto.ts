@@ -20,4 +20,11 @@ export class CreateAppointmentDto {
   @IsString()
   @IsNotEmpty()
   description: string
+
+  @IsNotEmpty()
+  @IsNumber()
+  userId: number
+
+  @IsNumber()
+  vehicleId: number
 }

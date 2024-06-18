@@ -11,8 +11,6 @@ export class Customer extends Person {
   @OneToMany(() => Vehicle, (vehicle) => vehicle.customer)
   vehicles: Vehicle[]
 
-  @OneToMany(() => Appointment, (appointments) => appointments.customer, {
-    cascade: true
-  })
+  @OneToMany(() => Appointment, (appointments) => appointments.customer, { cascade: true })
   appointments: Appointment[]
 }

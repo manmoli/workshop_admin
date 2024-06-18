@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import { BranchOffice } from '../../branches/entities/branch.entity'
 import { Customer } from '../../customers/entities/customers.entity'
+import { Appointment } from '../../appointments/entities/appointment.entity'
 
 export enum Transmission {
   Automatic = 'automatic',
@@ -49,4 +50,7 @@ export class Vehicle {
     nullable: false
   })
   customer: Customer
+
+  @OneToMany(() => Appointment, (appointment) => appointment.vehicle, { cascade: true})
+  appointments: Appointment[]
 }

@@ -17,9 +17,6 @@ export class CreateUserDto extends CreatePersonDto {
   @IsEnum(UserType)
   user_type: UserType
 
-  @IsString()
-  days_to_work: string
-
   @IsNotEmpty()
   @IsDateString()
   employee_since: Date
