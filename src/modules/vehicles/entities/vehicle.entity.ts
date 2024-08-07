@@ -2,6 +2,8 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'ty
 import { BranchOffice } from '../../branches/entities/branch.entity'
 import { Customer } from '../../customers/entities/customers.entity'
 import { Appointment } from '../../appointments/entities/appointment.entity'
+import { ServiceOrder } from '../../service_order/entities/service_order.entity'
+import { VehicleModel } from '../../vehicle_model/entities/vehicle_model.entity'
 
 export enum Transmission {
   Automatic = 'automatic',
@@ -50,7 +52,13 @@ export class Vehicle {
     nullable: false
   })
   customer: Customer
+  
+  @ManyToOne(() => VehicleModel, (vehicleModel) => vehicleModel.vehicles)
+  vehicleModel: VehicleModel;
 
   @OneToMany(() => Appointment, (appointment) => appointment.vehicle, { cascade: true})
   appointments: Appointment[]
+
+  @OneToMany(() => ServiceOrder, (serviceOrders) => serviceOrders.vehicle, {cascade: true})
+  serviceOrders: ServiceOrder
 }

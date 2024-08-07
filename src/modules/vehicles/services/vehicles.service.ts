@@ -11,7 +11,7 @@ import * as _ from 'lodash'
 export class VehiclesService {
   constructor(
     @InjectRepository(Vehicle) private vehicleRepo: Repository<Vehicle>
-  ) {}
+  ) { }
   create(createVehicleDto: CreateVehicleDto) {
     const createdVehicle: Vehicle = this.vehicleRepo.create(createVehicleDto)
 
@@ -23,12 +23,17 @@ export class VehiclesService {
   }
 
   async findOne(id: number) {
-    const vehicle: Vehicle = await this.vehicleRepo.findOneBy({ id })
-    if (!vehicle) {
-      throw new EntityNotFoundError(Vehicle, { id })
+    try {
+      const vehicle: Vehicle = await this.vehicleRepo.findOne({ where: { id }, relations: ['customer'] })
+      if (!vehicle) {
+        throw new EntityNotFoundError(Vehicle, { id })
+      }
+  
+      return vehicle
+      
+    } catch (error) {
+      console.log(error)
     }
-
-    return vehicle
   }
 
   async update(id: number, updateVehicleDto: UpdateVehicleDto) {

@@ -19,6 +19,11 @@ import { UserModule } from './modules/users/users.module'
 import { CustomerCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
 import { AppointmentsModule } from './modules/appointments/appointments.module';
 import { BillingInfoModule } from './billing_info/billing_info.module';
+import { ServicesModule } from './modules/services/services.module';
+import { ServiceTypeModule } from './modules/service_type/service_type.module';
+import { SparePartModule } from './modules/spare_part/spare_part.module';
+import { ServiceOrderModule } from './modules/service_order/service_order.module';
+import { VehicleModelModule } from './modules/vehicle_model/vehicle_model.module';
 
 @Module({
   imports: [
@@ -47,7 +52,12 @@ import { BillingInfoModule } from './billing_info/billing_info.module';
     ]),
     UserModule,
     AppointmentsModule,
-    BillingInfoModule
+    BillingInfoModule,
+    ServicesModule,
+    ServiceTypeModule,
+    SparePartModule,
+    ServiceOrderModule,
+    VehicleModelModule
   ]
 })
 export class AppModule implements NestModule {
@@ -56,8 +66,7 @@ export class AppModule implements NestModule {
     consumer
       .apply(CustomerCheckMiddleware)
       .forRoutes(
-        { path: 'customers/:customer_id/vehicles', method: RequestMethod.POST },
-        { path: 'customers/:customer_id/vehicles', method: RequestMethod.GET }
+        { path: 'customers/:customer_id/vehicles', method: RequestMethod.ALL }
       )
   }
 }

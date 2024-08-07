@@ -1,8 +1,9 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { registerAs } from '@nestjs/config'
 import { ParseBoolPipe } from '@nestjs/common'
+import { DataSourceOptions } from 'typeorm'
 
-export const TypeOrmModuleConfig: TypeOrmModuleOptions = {
+export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: 'localhost',
   port: 5432,

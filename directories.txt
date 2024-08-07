@@ -1,0 +1,722 @@
+.
+├── 52b28224-7bb9-47b6-8674-a896a5b99391 (1).xml
+├── dataFactura.json
+├── directories.txt
+├── dist
+│   ├── app.module.d.ts
+│   ├── app.module.js
+│   ├── app.module.js.map
+│   ├── billing_info
+│   │   ├── billing_info.controller.d.ts
+│   │   ├── billing_info.controller.js
+│   │   ├── billing_info.controller.js.map
+│   │   ├── billing_info.module.d.ts
+│   │   ├── billing_info.module.js
+│   │   ├── billing_info.module.js.map
+│   │   ├── billing_info.service.d.ts
+│   │   ├── billing_info.service.js
+│   │   ├── billing_info.service.js.map
+│   │   ├── dto
+│   │   │   ├── create-billing_info.dto.d.ts
+│   │   │   ├── create-billing_info.dto.js
+│   │   │   ├── create-billing_info.dto.js.map
+│   │   │   ├── update-billing_info.dto.d.ts
+│   │   │   ├── update-billing_info.dto.js
+│   │   │   └── update-billing_info.dto.js.map
+│   │   └── entities
+│   │       ├── billing_info.entity.d.ts
+│   │       ├── billing_info.entity.js
+│   │       └── billing_info.entity.js.map
+│   ├── conf.d.ts
+│   ├── conf.js
+│   ├── conf.js.map
+│   ├── database
+│   │   ├── database.module.d.ts
+│   │   ├── database.module.js
+│   │   └── database.module.js.map
+│   ├── environments.d.ts
+│   ├── environments.js
+│   ├── environments.js.map
+│   ├── envValidatorSchema.d.ts
+│   ├── envValidatorSchema.js
+│   ├── envValidatorSchema.js.map
+│   ├── Errors
+│   │   ├── customDatabaseErrors.d.ts
+│   │   ├── customDatabaseErrors.js
+│   │   └── customDatabaseErrors.js.map
+│   ├── filters
+│   │   ├── errors.filter.d.ts
+│   │   ├── errors.filter.js
+│   │   └── errors.filter.js.map
+│   ├── main.d.ts
+│   ├── main.js
+│   ├── main.js.map
+│   ├── modules
+│   │   ├── appointments
+│   │   │   ├── appointments.module.d.ts
+│   │   │   ├── appointments.module.js
+│   │   │   ├── appointments.module.js.map
+│   │   │   ├── controllers
+│   │   │   │   ├── appointments.controller.d.ts
+│   │   │   │   ├── appointments.controller.js
+│   │   │   │   └── appointments.controller.js.map
+│   │   │   ├── dto
+│   │   │   │   ├── create-appointment.dto.d.ts
+│   │   │   │   ├── create-appointment.dto.js
+│   │   │   │   ├── create-appointment.dto.js.map
+│   │   │   │   ├── update-appointment.dto.d.ts
+│   │   │   │   ├── update-appointment.dto.js
+│   │   │   │   └── update-appointment.dto.js.map
+│   │   │   ├── entities
+│   │   │   │   ├── appointment.entity.d.ts
+│   │   │   │   ├── appointment.entity.js
+│   │   │   │   └── appointment.entity.js.map
+│   │   │   └── services
+│   │   │       ├── appointments.service.d.ts
+│   │   │       ├── appointments.service.js
+│   │   │       └── appointments.service.js.map
+│   │   ├── branches
+│   │   │   ├── branch.module.d.ts
+│   │   │   ├── branch.module.js
+│   │   │   ├── branch.module.js.map
+│   │   │   ├── controllers
+│   │   │   │   ├── branch.controller.d.ts
+│   │   │   │   ├── branch.controller.js
+│   │   │   │   └── branch.controller.js.map
+│   │   │   ├── dtos
+│   │   │   │   ├── branch.dto.d.ts
+│   │   │   │   ├── branch.dto.js
+│   │   │   │   └── branch.dto.js.map
+│   │   │   ├── entities
+│   │   │   │   ├── branch.entity.d.ts
+│   │   │   │   ├── branch.entity.js
+│   │   │   │   └── branch.entity.js.map
+│   │   │   └── services
+│   │   │       ├── branch.service.d.ts
+│   │   │       ├── branch.service.js
+│   │   │       └── branch.service.js.map
+│   │   ├── common
+│   │   │   ├── create-person.dto.d.ts
+│   │   │   ├── create-person.dto.js
+│   │   │   ├── create-person.dto.js.map
+│   │   │   ├── employee.entity.d.ts
+│   │   │   ├── employee.entity.js
+│   │   │   ├── employee.entity.js.map
+│   │   │   ├── person.entity.d.ts
+│   │   │   ├── person.entity.js
+│   │   │   └── person.entity.js.map
+│   │   ├── customers
+│   │   │   ├── controllers
+│   │   │   │   ├── customers.controller.d.ts
+│   │   │   │   ├── customers.controller.js
+│   │   │   │   └── customers.controller.js.map
+│   │   │   ├── customers.module.d.ts
+│   │   │   ├── customers.module.js
+│   │   │   ├── customers.module.js.map
+│   │   │   ├── dto
+│   │   │   │   ├── create-customers.dto.d.ts
+│   │   │   │   ├── create-customers.dto.js
+│   │   │   │   ├── create-customers.dto.js.map
+│   │   │   │   ├── update-customers.dto.d.ts
+│   │   │   │   ├── update-customers.dto.js
+│   │   │   │   └── update-customers.dto.js.map
+│   │   │   ├── entities
+│   │   │   │   ├── customers.entity.d.ts
+│   │   │   │   ├── customers.entity.js
+│   │   │   │   └── customers.entity.js.map
+│   │   │   └── services
+│   │   │       ├── customers.service.d.ts
+│   │   │       ├── customers.service.js
+│   │   │       └── customers.service.js.map
+│   │   ├── departments
+│   │   │   ├── controllers
+│   │   │   │   ├── departments.controller.d.ts
+│   │   │   │   ├── departments.controller.js
+│   │   │   │   └── departments.controller.js.map
+│   │   │   ├── departments.module.d.ts
+│   │   │   ├── departments.module.js
+│   │   │   ├── departments.module.js.map
+│   │   │   ├── dto
+│   │   │   │   ├── create-department.dto.d.ts
+│   │   │   │   ├── create-department.dto.js
+│   │   │   │   ├── create-department.dto.js.map
+│   │   │   │   ├── update-department.dto.d.ts
+│   │   │   │   ├── update-department.dto.js
+│   │   │   │   └── update-department.dto.js.map
+│   │   │   ├── entities
+│   │   │   │   ├── department.entity.d.ts
+│   │   │   │   ├── department.entity.js
+│   │   │   │   └── department.entity.js.map
+│   │   │   └── services
+│   │   │       ├── departments.service.d.ts
+│   │   │       ├── departments.service.js
+│   │   │       └── departments.service.js.map
+│   │   ├── users
+│   │   │   ├── controllers
+│   │   │   │   ├── user.controller.d.ts
+│   │   │   │   ├── user.controller.js
+│   │   │   │   └── user.controller.js.map
+│   │   │   ├── dto
+│   │   │   │   ├── create-user.dto.d.ts
+│   │   │   │   ├── create-user.dto.js
+│   │   │   │   ├── create-user.dto.js.map
+│   │   │   │   ├── update-user.dto.d.ts
+│   │   │   │   ├── update-user.dto.js
+│   │   │   │   └── update-user.dto.js.map
+│   │   │   ├── entities
+│   │   │   │   ├── users.entity.d.ts
+│   │   │   │   ├── users.entity.js
+│   │   │   │   └── users.entity.js.map
+│   │   │   ├── services
+│   │   │   │   ├── users.service.d.ts
+│   │   │   │   ├── users.service.js
+│   │   │   │   └── users.service.js.map
+│   │   │   ├── users.module.d.ts
+│   │   │   ├── users.module.js
+│   │   │   └── users.module.js.map
+│   │   └── vehicles
+│   │       ├── controllers
+│   │       │   ├── vehicles.controller.d.ts
+│   │       │   ├── vehicles.controller.js
+│   │       │   └── vehicles.controller.js.map
+│   │       ├── dto
+│   │       │   ├── create-vehicle.dto.d.ts
+│   │       │   ├── create-vehicle.dto.js
+│   │       │   ├── create-vehicle.dto.js.map
+│   │       │   ├── update-vehicle.dto.d.ts
+│   │       │   ├── update-vehicle.dto.js
+│   │       │   └── update-vehicle.dto.js.map
+│   │       ├── entities
+│   │       │   ├── vehicle.entity.d.ts
+│   │       │   ├── vehicle.entity.js
+│   │       │   └── vehicle.entity.js.map
+│   │       ├── middlewares
+│   │       │   ├── client-check.middleware.d.ts
+│   │       │   ├── client-check.middleware.js
+│   │       │   ├── client-check.middleware.js.map
+│   │       │   ├── parse-numeric.middeware.d.ts
+│   │       │   ├── parse-numeric.middeware.js
+│   │       │   └── parse-numeric.middeware.js.map
+│   │       ├── services
+│   │       │   ├── vehicles.service.d.ts
+│   │       │   ├── vehicles.service.js
+│   │       │   └── vehicles.service.js.map
+│   │       ├── vehicles.module.d.ts
+│   │       ├── vehicles.module.js
+│   │       └── vehicles.module.js.map
+│   ├── pipes
+│   │   ├── emptyStringToNull.d.ts
+│   │   ├── emptyStringToNull.js
+│   │   ├── emptyStringToNull.js.map
+│   │   ├── parseNumericString.d.ts
+│   │   ├── parseNumericString.js
+│   │   └── parseNumericString.js.map
+│   ├── src
+│   │   ├── app.module.d.ts
+│   │   ├── app.module.js
+│   │   ├── app.module.js.map
+│   │   ├── billing_info
+│   │   │   ├── billing_info.controller.d.ts
+│   │   │   ├── billing_info.controller.js
+│   │   │   ├── billing_info.controller.js.map
+│   │   │   ├── billing_info.controller.spec.d.ts
+│   │   │   ├── billing_info.controller.spec.js
+│   │   │   ├── billing_info.controller.spec.js.map
+│   │   │   ├── billing_info.module.d.ts
+│   │   │   ├── billing_info.module.js
+│   │   │   ├── billing_info.module.js.map
+│   │   │   ├── billing_info.service.d.ts
+│   │   │   ├── billing_info.service.js
+│   │   │   ├── billing_info.service.js.map
+│   │   │   ├── billing_info.service.spec.d.ts
+│   │   │   ├── billing_info.service.spec.js
+│   │   │   ├── billing_info.service.spec.js.map
+│   │   │   ├── dto
+│   │   │   │   ├── create-billing_info.dto.d.ts
+│   │   │   │   ├── create-billing_info.dto.js
+│   │   │   │   ├── create-billing_info.dto.js.map
+│   │   │   │   ├── update-billing_info.dto.d.ts
+│   │   │   │   ├── update-billing_info.dto.js
+│   │   │   │   └── update-billing_info.dto.js.map
+│   │   │   └── entities
+│   │   │       ├── billing_info.entity.d.ts
+│   │   │       ├── billing_info.entity.js
+│   │   │       └── billing_info.entity.js.map
+│   │   ├── conf.d.ts
+│   │   ├── conf.js
+│   │   ├── conf.js.map
+│   │   ├── database
+│   │   │   ├── database.module.d.ts
+│   │   │   ├── database.module.js
+│   │   │   └── database.module.js.map
+│   │   ├── environments.d.ts
+│   │   ├── environments.js
+│   │   ├── environments.js.map
+│   │   ├── envValidatorSchema.d.ts
+│   │   ├── envValidatorSchema.js
+│   │   ├── envValidatorSchema.js.map
+│   │   ├── Errors
+│   │   │   ├── customDatabaseErrors.d.ts
+│   │   │   ├── customDatabaseErrors.js
+│   │   │   └── customDatabaseErrors.js.map
+│   │   ├── filters
+│   │   │   ├── errors.filter.d.ts
+│   │   │   ├── errors.filter.js
+│   │   │   ├── errors.filter.js.map
+│   │   │   ├── errors.filter.spec.d.ts
+│   │   │   ├── errors.filter.spec.js
+│   │   │   └── errors.filter.spec.js.map
+│   │   ├── main.d.ts
+│   │   ├── main.js
+│   │   ├── main.js.map
+│   │   ├── modules
+│   │   │   ├── appointments
+│   │   │   │   ├── appointments.module.d.ts
+│   │   │   │   ├── appointments.module.js
+│   │   │   │   ├── appointments.module.js.map
+│   │   │   │   ├── controllers
+│   │   │   │   │   ├── appointments.controller.d.ts
+│   │   │   │   │   ├── appointments.controller.js
+│   │   │   │   │   ├── appointments.controller.js.map
+│   │   │   │   │   ├── appointments.controller.spec.d.ts
+│   │   │   │   │   ├── appointments.controller.spec.js
+│   │   │   │   │   └── appointments.controller.spec.js.map
+│   │   │   │   ├── dto
+│   │   │   │   │   ├── create-appointment.dto.d.ts
+│   │   │   │   │   ├── create-appointment.dto.js
+│   │   │   │   │   ├── create-appointment.dto.js.map
+│   │   │   │   │   ├── update-appointment.dto.d.ts
+│   │   │   │   │   ├── update-appointment.dto.js
+│   │   │   │   │   └── update-appointment.dto.js.map
+│   │   │   │   ├── entities
+│   │   │   │   │   ├── appointment.entity.d.ts
+│   │   │   │   │   ├── appointment.entity.js
+│   │   │   │   │   └── appointment.entity.js.map
+│   │   │   │   └── services
+│   │   │   │       ├── appointments.service.d.ts
+│   │   │   │       ├── appointments.service.js
+│   │   │   │       ├── appointments.service.js.map
+│   │   │   │       ├── appointments.service.spec.d.ts
+│   │   │   │       ├── appointments.service.spec.js
+│   │   │   │       └── appointments.service.spec.js.map
+│   │   │   ├── branches
+│   │   │   │   ├── branch.module.d.ts
+│   │   │   │   ├── branch.module.js
+│   │   │   │   ├── branch.module.js.map
+│   │   │   │   ├── controllers
+│   │   │   │   │   ├── branch.controller.d.ts
+│   │   │   │   │   ├── branch.controller.js
+│   │   │   │   │   ├── branch.controller.js.map
+│   │   │   │   │   ├── branch.controller.spec.d.ts
+│   │   │   │   │   ├── branch.controller.spec.js
+│   │   │   │   │   └── branch.controller.spec.js.map
+│   │   │   │   ├── dtos
+│   │   │   │   │   ├── branch.dto.d.ts
+│   │   │   │   │   ├── branch.dto.js
+│   │   │   │   │   └── branch.dto.js.map
+│   │   │   │   ├── entities
+│   │   │   │   │   ├── branch.entity.d.ts
+│   │   │   │   │   ├── branch.entity.js
+│   │   │   │   │   └── branch.entity.js.map
+│   │   │   │   └── services
+│   │   │   │       ├── branch.service.d.ts
+│   │   │   │       ├── branch.service.js
+│   │   │   │       └── branch.service.js.map
+│   │   │   ├── common
+│   │   │   │   ├── create-person.dto.d.ts
+│   │   │   │   ├── create-person.dto.js
+│   │   │   │   ├── create-person.dto.js.map
+│   │   │   │   ├── employee.entity.d.ts
+│   │   │   │   ├── employee.entity.js
+│   │   │   │   ├── employee.entity.js.map
+│   │   │   │   ├── person.entity.d.ts
+│   │   │   │   ├── person.entity.js
+│   │   │   │   └── person.entity.js.map
+│   │   │   ├── customers
+│   │   │   │   ├── controllers
+│   │   │   │   │   ├── customers.controller.d.ts
+│   │   │   │   │   ├── customers.controller.js
+│   │   │   │   │   ├── customers.controller.js.map
+│   │   │   │   │   ├── customers.controller.spec.d.ts
+│   │   │   │   │   ├── customers.controller.spec.js
+│   │   │   │   │   └── customers.controller.spec.js.map
+│   │   │   │   ├── customers.module.d.ts
+│   │   │   │   ├── customers.module.js
+│   │   │   │   ├── customers.module.js.map
+│   │   │   │   ├── dto
+│   │   │   │   │   ├── create-customers.dto.d.ts
+│   │   │   │   │   ├── create-customers.dto.js
+│   │   │   │   │   ├── create-customers.dto.js.map
+│   │   │   │   │   ├── update-customers.dto.d.ts
+│   │   │   │   │   ├── update-customers.dto.js
+│   │   │   │   │   └── update-customers.dto.js.map
+│   │   │   │   ├── entities
+│   │   │   │   │   ├── customers.entity.d.ts
+│   │   │   │   │   ├── customers.entity.js
+│   │   │   │   │   └── customers.entity.js.map
+│   │   │   │   └── services
+│   │   │   │       ├── customers.service.d.ts
+│   │   │   │       ├── customers.service.js
+│   │   │   │       ├── customers.service.js.map
+│   │   │   │       ├── customers.service.spec.d.ts
+│   │   │   │       ├── customers.service.spec.js
+│   │   │   │       └── customers.service.spec.js.map
+│   │   │   ├── departments
+│   │   │   │   ├── controllers
+│   │   │   │   │   ├── departments.controller.d.ts
+│   │   │   │   │   ├── departments.controller.js
+│   │   │   │   │   ├── departments.controller.js.map
+│   │   │   │   │   ├── departments.controller.spec.d.ts
+│   │   │   │   │   ├── departments.controller.spec.js
+│   │   │   │   │   └── departments.controller.spec.js.map
+│   │   │   │   ├── departments.module.d.ts
+│   │   │   │   ├── departments.module.js
+│   │   │   │   ├── departments.module.js.map
+│   │   │   │   ├── dto
+│   │   │   │   │   ├── create-department.dto.d.ts
+│   │   │   │   │   ├── create-department.dto.js
+│   │   │   │   │   ├── create-department.dto.js.map
+│   │   │   │   │   ├── update-department.dto.d.ts
+│   │   │   │   │   ├── update-department.dto.js
+│   │   │   │   │   └── update-department.dto.js.map
+│   │   │   │   ├── entities
+│   │   │   │   │   ├── department.entity.d.ts
+│   │   │   │   │   ├── department.entity.js
+│   │   │   │   │   └── department.entity.js.map
+│   │   │   │   └── services
+│   │   │   │       ├── departments.service.d.ts
+│   │   │   │       ├── departments.service.js
+│   │   │   │       ├── departments.service.js.map
+│   │   │   │       ├── departments.service.spec.d.ts
+│   │   │   │       ├── departments.service.spec.js
+│   │   │   │       └── departments.service.spec.js.map
+│   │   │   ├── users
+│   │   │   │   ├── controllers
+│   │   │   │   │   ├── user.controller.d.ts
+│   │   │   │   │   ├── user.controller.js
+│   │   │   │   │   ├── user.controller.js.map
+│   │   │   │   │   ├── user.controller.spec.d.ts
+│   │   │   │   │   ├── user.controller.spec.js
+│   │   │   │   │   └── user.controller.spec.js.map
+│   │   │   │   ├── dto
+│   │   │   │   │   ├── create-user.dto.d.ts
+│   │   │   │   │   ├── create-user.dto.js
+│   │   │   │   │   ├── create-user.dto.js.map
+│   │   │   │   │   ├── update-user.dto.d.ts
+│   │   │   │   │   ├── update-user.dto.js
+│   │   │   │   │   └── update-user.dto.js.map
+│   │   │   │   ├── entities
+│   │   │   │   │   ├── users.entity.d.ts
+│   │   │   │   │   ├── users.entity.js
+│   │   │   │   │   └── users.entity.js.map
+│   │   │   │   ├── services
+│   │   │   │   │   ├── users.service.d.ts
+│   │   │   │   │   ├── users.service.js
+│   │   │   │   │   ├── users.service.js.map
+│   │   │   │   │   ├── users.service.spec.d.ts
+│   │   │   │   │   ├── users.service.spec.js
+│   │   │   │   │   └── users.service.spec.js.map
+│   │   │   │   ├── users.module.d.ts
+│   │   │   │   ├── users.module.js
+│   │   │   │   └── users.module.js.map
+│   │   │   └── vehicles
+│   │   │       ├── controllers
+│   │   │       │   ├── vehicles.controller.d.ts
+│   │   │       │   ├── vehicles.controller.js
+│   │   │       │   ├── vehicles.controller.js.map
+│   │   │       │   ├── vehicles.controller.spec.d.ts
+│   │   │       │   ├── vehicles.controller.spec.js
+│   │   │       │   └── vehicles.controller.spec.js.map
+│   │   │       ├── dto
+│   │   │       │   ├── create-vehicle.dto.d.ts
+│   │   │       │   ├── create-vehicle.dto.js
+│   │   │       │   ├── create-vehicle.dto.js.map
+│   │   │       │   ├── update-vehicle.dto.d.ts
+│   │   │       │   ├── update-vehicle.dto.js
+│   │   │       │   └── update-vehicle.dto.js.map
+│   │   │       ├── entities
+│   │   │       │   ├── vehicle.entity.d.ts
+│   │   │       │   ├── vehicle.entity.js
+│   │   │       │   └── vehicle.entity.js.map
+│   │   │       ├── middlewares
+│   │   │       │   ├── client-check.middleware.d.ts
+│   │   │       │   ├── client-check.middleware.js
+│   │   │       │   ├── client-check.middleware.js.map
+│   │   │       │   ├── client-check.middleware.spec.d.ts
+│   │   │       │   ├── client-check.middleware.spec.js
+│   │   │       │   ├── client-check.middleware.spec.js.map
+│   │   │       │   ├── parse-numeric.middeware.d.ts
+│   │   │       │   ├── parse-numeric.middeware.js
+│   │   │       │   └── parse-numeric.middeware.js.map
+│   │   │       ├── services
+│   │   │       │   ├── vehicles.service.d.ts
+│   │   │       │   ├── vehicles.service.js
+│   │   │       │   ├── vehicles.service.js.map
+│   │   │       │   ├── vehicles.service.spec.d.ts
+│   │   │       │   ├── vehicles.service.spec.js
+│   │   │       │   └── vehicles.service.spec.js.map
+│   │   │       ├── vehicles.module.d.ts
+│   │   │       ├── vehicles.module.js
+│   │   │       └── vehicles.module.js.map
+│   │   ├── pipes
+│   │   │   ├── emptyStringToNull.d.ts
+│   │   │   ├── emptyStringToNull.js
+│   │   │   ├── emptyStringToNull.js.map
+│   │   │   ├── parseNumericString.d.ts
+│   │   │   ├── parseNumericString.js
+│   │   │   └── parseNumericString.js.map
+│   │   ├── testing
+│   │   │   └── dummies
+│   │   │       ├── customers.d.ts
+│   │   │       ├── customers.js
+│   │   │       ├── customers.js.map
+│   │   │       ├── vehicles.d.ts
+│   │   │       ├── vehicles.js
+│   │   │       └── vehicles.js.map
+│   │   └── utils
+│   │       ├── types.d.ts
+│   │       ├── types.js
+│   │       └── types.js.map
+│   ├── test
+│   │   ├── app.e2e-spec.d.ts
+│   │   ├── app.e2e-spec.js
+│   │   ├── app.e2e-spec.js.map
+│   │   ├── vehicles.e2e-spec.d.ts
+│   │   ├── vehicles.e2e-spec.js
+│   │   └── vehicles.e2e-spec.js.map
+│   ├── testing
+│   │   └── dummies
+│   │       ├── customers.d.ts
+│   │       ├── customers.js
+│   │       ├── customers.js.map
+│   │       ├── vehicles.d.ts
+│   │       ├── vehicles.js
+│   │       └── vehicles.js.map
+│   ├── tsconfig.build.tsbuildinfo
+│   ├── tsconfig.tsbuildinfo
+│   └── utils
+│       ├── types.d.ts
+│       ├── types.js
+│       └── types.js.map
+├── docker-compose.yml
+├── Dockerfile
+├── mopm910802hf2.cer
+├── nest-cli.json
+├── package.json
+├── package-lock.json
+├── README.md
+├── src
+│   ├── app.module.ts
+│   ├── billing_info
+│   │   ├── billing_info.controller.spec.ts
+│   │   ├── billing_info.controller.ts
+│   │   ├── billing_info.module.ts
+│   │   ├── billing_info.service.spec.ts
+│   │   ├── billing_info.service.ts
+│   │   ├── dto
+│   │   │   ├── create-billing_info.dto.ts
+│   │   │   └── update-billing_info.dto.ts
+│   │   └── entities
+│   │       └── billing_info.entity.ts
+│   ├── conf.ts
+│   ├── database
+│   │   └── database.module.ts
+│   ├── environments.ts
+│   ├── envValidatorSchema.ts
+│   ├── Errors
+│   │   └── customDatabaseErrors.ts
+│   ├── filters
+│   │   ├── errors.filter.spec.ts
+│   │   └── errors.filter.ts
+│   ├── main.ts
+│   ├── modules
+│   │   ├── appointments
+│   │   │   ├── appointments.module.ts
+│   │   │   ├── controllers
+│   │   │   │   ├── appointments.controller.spec.ts
+│   │   │   │   └── appointments.controller.ts
+│   │   │   ├── dto
+│   │   │   │   ├── create-appointment.dto.ts
+│   │   │   │   └── update-appointment.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── appointment.entity.ts
+│   │   │   └── services
+│   │   │       ├── appointments.service.spec.ts
+│   │   │       └── appointments.service.ts
+│   │   ├── branches
+│   │   │   ├── branch.module.ts
+│   │   │   ├── controllers
+│   │   │   │   ├── branch.controller.spec.ts
+│   │   │   │   └── branch.controller.ts
+│   │   │   ├── dtos
+│   │   │   │   └── branch.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── branch.entity.ts
+│   │   │   └── services
+│   │   │       └── branch.service.ts
+│   │   ├── common
+│   │   │   ├── create-person.dto.ts
+│   │   │   ├── employee.entity.ts
+│   │   │   └── person.entity.ts
+│   │   ├── customers
+│   │   │   ├── controllers
+│   │   │   │   ├── customers.controller.spec.ts
+│   │   │   │   └── customers.controller.ts
+│   │   │   ├── customers.module.ts
+│   │   │   ├── dto
+│   │   │   │   ├── create-customers.dto.ts
+│   │   │   │   └── update-customers.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── customers.entity.ts
+│   │   │   └── services
+│   │   │       ├── customers.service.spec.ts
+│   │   │       └── customers.service.ts
+│   │   ├── departments
+│   │   │   ├── controllers
+│   │   │   │   ├── departments.controller.spec.ts
+│   │   │   │   └── departments.controller.ts
+│   │   │   ├── departments.module.ts
+│   │   │   ├── dto
+│   │   │   │   ├── create-department.dto.ts
+│   │   │   │   └── update-department.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── department.entity.ts
+│   │   │   └── services
+│   │   │       ├── departments.service.spec.ts
+│   │   │       └── departments.service.ts
+│   │   ├── service_order
+│   │   │   ├── dto
+│   │   │   │   ├── create-service_order.dto.ts
+│   │   │   │   └── update-service_order.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── service_order.entity.ts
+│   │   │   ├── service_order.controller.spec.ts
+│   │   │   ├── service_order.controller.ts
+│   │   │   ├── service_order.module.ts
+│   │   │   ├── service_order.service.spec.ts
+│   │   │   └── service_order.service.ts
+│   │   ├── service_order_services
+│   │   │   ├── dto
+│   │   │   │   ├── create-service_order_service.dto.ts
+│   │   │   │   └── update-service_order_service.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── service_order_service.entity.ts
+│   │   │   ├── service_order_services.controller.spec.ts
+│   │   │   ├── service_order_services.controller.ts
+│   │   │   ├── service_order_services.module.ts
+│   │   │   ├── service_order_services.service.spec.ts
+│   │   │   └── service_order_services.service.ts
+│   │   ├── services
+│   │   │   ├── dto
+│   │   │   │   ├── create-service.dto.ts
+│   │   │   │   └── update-service.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── service.entity.ts
+│   │   │   ├── services.controller.spec.ts
+│   │   │   ├── services.controller.ts
+│   │   │   ├── services.module.ts
+│   │   │   ├── services.service.spec.ts
+│   │   │   └── services.service.ts
+│   │   ├── service_spare_part
+│   │   │   ├── dto
+│   │   │   │   ├── create-service_spare_part.dto.ts
+│   │   │   │   └── update-service_spare_part.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── service_spare_part.entity.ts
+│   │   │   ├── service_spare_part.controller.spec.ts
+│   │   │   ├── service_spare_part.controller.ts
+│   │   │   ├── service_spare_part.module.ts
+│   │   │   ├── service_spare_part.service.spec.ts
+│   │   │   └── service_spare_part.service.ts
+│   │   ├── service_type
+│   │   │   ├── dto
+│   │   │   │   ├── create-service_type.dto.ts
+│   │   │   │   └── update-service_type.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── service_type.entity.ts
+│   │   │   ├── service_type.controller.spec.ts
+│   │   │   ├── service_type.controller.ts
+│   │   │   ├── service_type.module.ts
+│   │   │   ├── service_type.service.spec.ts
+│   │   │   └── service_type.service.ts
+│   │   ├── spare_part
+│   │   │   ├── dto
+│   │   │   │   ├── create-spare_part.dto.ts
+│   │   │   │   └── update-spare_part.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── spare_part.entity.ts
+│   │   │   ├── spare_part.controller.spec.ts
+│   │   │   ├── spare_part.controller.ts
+│   │   │   ├── spare_part.module.ts
+│   │   │   ├── spare_part.service.spec.ts
+│   │   │   └── spare_part.service.ts
+│   │   ├── users
+│   │   │   ├── controllers
+│   │   │   │   ├── user.controller.spec.ts
+│   │   │   │   └── user.controller.ts
+│   │   │   ├── dto
+│   │   │   │   ├── create-user.dto.ts
+│   │   │   │   └── update-user.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── users.entity.ts
+│   │   │   ├── services
+│   │   │   │   ├── users.service.spec.ts
+│   │   │   │   └── users.service.ts
+│   │   │   └── users.module.ts
+│   │   ├── vehicle_model
+│   │   │   ├── dto
+│   │   │   │   ├── create-vehicle_model.dto.ts
+│   │   │   │   └── update-vehicle_model.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── vehicle_model.entity.ts
+│   │   │   ├── vehicle_model.controller.spec.ts
+│   │   │   ├── vehicle_model.controller.ts
+│   │   │   ├── vehicle_model.module.ts
+│   │   │   ├── vehicle_model.service.spec.ts
+│   │   │   └── vehicle_model.service.ts
+│   │   ├── vehicles
+│   │   │   ├── controllers
+│   │   │   │   ├── vehicles.controller.spec.ts
+│   │   │   │   └── vehicles.controller.ts
+│   │   │   ├── dto
+│   │   │   │   ├── create-vehicle.dto.ts
+│   │   │   │   └── update-vehicle.dto.ts
+│   │   │   ├── entities
+│   │   │   │   └── vehicle.entity.ts
+│   │   │   ├── middlewares
+│   │   │   │   ├── client-check.middleware.spec.ts
+│   │   │   │   ├── client-check.middleware.ts
+│   │   │   │   └── parse-numeric.middeware.ts
+│   │   │   ├── services
+│   │   │   │   ├── vehicles.service.spec.ts
+│   │   │   │   └── vehicles.service.ts
+│   │   │   └── vehicles.module.ts
+│   │   └── vehicle_spare_part
+│   │       ├── dto
+│   │       │   ├── create-vehicle_spare_part.dto.ts
+│   │       │   └── update-vehicle_spare_part.dto.ts
+│   │       ├── entities
+│   │       │   └── vehicle_spare_part.entity.ts
+│   │       ├── vehicle_spare_part.controller.spec.ts
+│   │       ├── vehicle_spare_part.controller.ts
+│   │       ├── vehicle_spare_part.module.ts
+│   │       ├── vehicle_spare_part.service.spec.ts
+│   │       └── vehicle_spare_part.service.ts
+│   ├── pipes
+│   │   ├── emptyStringToNull.ts
+│   │   └── parseNumericString.ts
+│   ├── testing
+│   │   └── dummies
+│   │       ├── customers.ts
+│   │       └── vehicles.ts
+│   └── utils
+│       └── types.ts
+├── test
+│   ├── app.e2e-spec.ts
+│   ├── jest-e2e.json
+│   └── vehicles.e2e-spec.ts
+├── timbrado.xml
+├── tsconfig.build.json
+└── tsconfig.json
+
+159 directories, 561 files
