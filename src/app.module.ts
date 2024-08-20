@@ -33,7 +33,7 @@ import { VehicleModelModule } from './modules/vehicle_model/vehicle_model.module
       load: [config],
       validationSchema: joiValidator
     }),
-    BranchModule,
+    /* BranchModule,
     DepartmentsModule,
     DatabaseModule,
     CustomersModule,
@@ -56,7 +56,7 @@ import { VehicleModelModule } from './modules/vehicle_model/vehicle_model.module
     ServicesModule,
     ServiceTypeModule,
     SparePartModule,
-    ServiceOrderModule,
+    ServiceOrderModule, */
     VehicleModelModule
   ]
 })

@@ -14,8 +14,9 @@ import { VehiclesService } from '../services/vehicles.service'
 import { CreateVehicleDto } from '../dto/create-vehicle.dto'
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto'
 import { FindOptions } from '../../../utils/types'
-import { Vehicle } from '../entities/vehicle.entity'
-import { ParseNumericPipe } from '../../../pipes/parseNumericString'
+/* import { Vehicle } from '../entities/vehicle.entity'
+ */import { ParseNumericPipe } from '../../../pipes/parseNumericString'
+import { CustomerVehicle } from '../entities/vehicle.entity'
 
 @Controller()
 export class VehiclesController {
@@ -35,7 +36,7 @@ export class VehiclesController {
   @Get()
   findAll(
     @Param('customer_id') customer_id: number,
-    @Query() findOptions: FindOptions<Vehicle>
+    @Query() findOptions: FindOptions<CustomerVehicle>
   ) {
     return this.vehiclesService.findAll(customer_id ? { where: { customerId: customer_id } } : findOptions)
   }

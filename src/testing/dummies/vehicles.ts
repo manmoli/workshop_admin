@@ -1,4 +1,4 @@
-import { CreateVehicleDto } from '../../modules/vehicles/dto/create-vehicle.dto'
+/* import { CreateVehicleDto } from '../../modules/vehicles/dto/create-vehicle.dto'
 import { UpdateVehicleDto } from '../../modules/vehicles/dto/update-vehicle.dto'
 import {
   Transmission,
@@ -39,3 +39,4 @@ export const vehiclesArray = [
   { ...vehicle3, modelYear: '2005', model: '3' },
   { ...vehicle4, modelYear: '2006', model: '4' }
 ]
+ */

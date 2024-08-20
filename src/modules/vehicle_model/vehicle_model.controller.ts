@@ -1,34 +1,53 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { VehicleModelService } from './vehicle_model.service';
-import { CreateVehicleModelDto } from './dto/create-vehicle_model.dto';
-import { UpdateVehicleModelDto } from './dto/update-vehicle_model.dto';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  HttpCode,
+} from '@nestjs/common'
+import { VehicleModel } from './entities/vehicle_model.entity'
+import { VehicleModelService } from './vehicle_model.service'
+import { CreateVehicleModelDto } from './dto/create-vehicle_model.dto'
+import { ParseNumericPipe } from '../../pipes/parseNumericString'
+import { FindOptions } from '../../utils/types'
+import { UpdateVehicleModelDto } from './dto/update-vehicle_model.dto'
 
-@Controller('vehicle-model')
+
+@Controller()
 export class VehicleModelController {
-  constructor(private readonly vehicleModelService: VehicleModelService) {}
+  constructor(private readonly vehiclesService: VehicleModelService) { }
 
   @Post()
-  create(@Body() createVehicleModelDto: CreateVehicleModelDto) {
-    return this.vehicleModelService.create(createVehicleModelDto);
+  create(
+    @Body(new ParseNumericPipe()) createVehicleDto: CreateVehicleModelDto
+  ) {
+    return this.vehiclesService.create(createVehicleDto)
   }
 
   @Get()
-  findAll() {
-    return this.vehicleModelService.findAll();
+  findAll(
+    @Query() findOptions: FindOptions<VehicleModel>
+  ) {
+    return this.vehiclesService.findAll(findOptions)
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.vehicleModelService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.vehiclesService.findOne(id)
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVehicleModelDto: UpdateVehicleModelDto) {
-    return this.vehicleModelService.update(+id, updateVehicleModelDto);
+  update(@Param('id') id: number, @Body() updateVehicleDto: UpdateVehicleModelDto) {
+    return this.vehiclesService.update(id, updateVehicleDto)
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.vehicleModelService.remove(+id);
+  @HttpCode(204)
+  remove(@Param('id') id: number) {
+    return this.vehiclesService.remove(+id)
   }
 }

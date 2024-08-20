@@ -1,27 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { VehicleSparePart } from '../../spare_part/entities/vehicle_spare_part.entity';
-import { Vehicle } from '../../vehicles/entities/vehicle.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class VehicleModel {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
-  @Column()
-  vim: string;
+  @Column({ type: 'varchar', nullable: true })
+  brand: string
 
-  @Column()
-  year: number;
+  @Column({ type: 'varchar', nullable: false })
+  model: string
 
-  @Column()
-  model: string;
+  @Column({ type: 'int', nullable: false })
+  model_year: number
 
-  @Column()
-  motor: string;
+  @Column({ type: 'int', nullable: false })
+  cylinders: number
 
-  @OneToMany(() => VehicleSparePart, (vehicleSparePart) => vehicleSparePart.vehicleModel)
-  vehicleSpareParts: VehicleSparePart[];
+  @Column({ type: 'float', nullable: true })
+  vehicle_engine: string //displ
 
-  @OneToMany(() => Vehicle, (vehicle) => vehicle.vehicleModel)
-  vehicles: Vehicle[];
+  @Column({ type: 'varchar', nullable: true })
+  vehicle_transmission: string
+
 }

@@ -4,29 +4,29 @@ import { EntityNotFoundError, Repository } from 'typeorm'
 import { FindOptions } from '../../../utils/types'
 import { CreateVehicleDto } from '../dto/create-vehicle.dto'
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto'
-import { Vehicle } from '../entities/vehicle.entity'
 import * as _ from 'lodash'
+import { CustomerVehicle } from '../entities/vehicle.entity'
 
 @Injectable()
 export class VehiclesService {
   constructor(
-    @InjectRepository(Vehicle) private vehicleRepo: Repository<Vehicle>
+    @InjectRepository(CustomerVehicle) private vehicleRepo: Repository<CustomerVehicle>
   ) { }
   create(createVehicleDto: CreateVehicleDto) {
-    const createdVehicle: Vehicle = this.vehicleRepo.create(createVehicleDto)
+    const createdVehicle: CustomerVehicle = this.vehicleRepo.create(createVehicleDto)
 
     return this.vehicleRepo.save(createdVehicle)
   }
 
-  findAll(findOptions: FindOptions<Vehicle>) {
+  findAll(findOptions: FindOptions<CustomerVehicle>) {
     return this.vehicleRepo.find(findOptions)
   }
 
   async findOne(id: number) {
     try {
-      const vehicle: Vehicle = await this.vehicleRepo.findOne({ where: { id }, relations: ['customer'] })
+      const vehicle: CustomerVehicle = await this.vehicleRepo.findOne({ where: { id }, relations: ['customer'] })
       if (!vehicle) {
-        throw new EntityNotFoundError(Vehicle, { id })
+        throw new EntityNotFoundError(CustomerVehicle, { id })
       }
   
       return vehicle
@@ -40,7 +40,7 @@ export class VehiclesService {
     const { affected } = await this.vehicleRepo.update({ id }, updateVehicleDto)
 
     if (_.isNil(affected) || affected === 0) {
-      throw new EntityNotFoundError(Vehicle, { id })
+      throw new EntityNotFoundError(CustomerVehicle, { id })
     }
 
     return this.vehicleRepo.findOneBy({ id })
@@ -50,7 +50,7 @@ export class VehiclesService {
     const { affected } = await this.vehicleRepo.delete({ id })
 
     if (affected === 0) {
-      throw new EntityNotFoundError(Vehicle, { id })
+      throw new EntityNotFoundError(CustomerVehicle, { id })
     }
 
     return affected === 1

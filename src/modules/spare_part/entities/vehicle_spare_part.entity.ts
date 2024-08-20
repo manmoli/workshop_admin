@@ -7,8 +7,8 @@ export class VehicleSparePart {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => VehicleModel, (vehicleModel) => vehicleModel.vehicleSpareParts)
-  vehicleModel: VehicleModel;
+/*   @ManyToOne(() => VehicleModel, (vehicleModel) => vehicleModel.vehicleSpareParts)
+  vehicleModel: VehicleModel; */
 
   @ManyToOne(() => SparePart, (sparePart) => sparePart.vehicleSpareParts)
   sparePart: SparePart;

@@ -1,5 +1,4 @@
-import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
-import { Transmission } from '../entities/vehicle.entity'
+import { IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class CreateVehicleDto {
   @IsOptional()
@@ -17,8 +16,8 @@ export class CreateVehicleDto {
   @IsString()
   vehicle_engine: string
 
-  @IsEnum(Transmission)
-  vehicle_transmission: Transmission
+  @IsString()
+  vehicle_transmission: string
 
   @IsOptional()
   @IsString()
