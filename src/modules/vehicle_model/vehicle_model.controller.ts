@@ -17,7 +17,7 @@ import { FindOptions } from '../../utils/types'
 import { UpdateVehicleModelDto } from './dto/update-vehicle_model.dto'
 
 
-@Controller()
+@Controller('vehicle-models')
 export class VehicleModelController {
   constructor(private readonly vehiclesService: VehicleModelService) { }
 

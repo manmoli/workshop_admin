@@ -33,11 +33,11 @@ import { VehicleModelModule } from './modules/vehicle_model/vehicle_model.module
       load: [config],
       validationSchema: joiValidator
     }),
-    /* BranchModule,
-    DepartmentsModule,
     DatabaseModule,
+    /* BranchModule,
+    DepartmentsModule, */
     CustomersModule,
-    VehiclesModule,
+    /*VehiclesModule,
     RouterModule.register([
       {
         path: 'customers',
