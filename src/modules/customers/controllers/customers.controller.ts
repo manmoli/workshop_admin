@@ -21,7 +21,7 @@ import { Customer } from '../entities/customers.entity'
 import { EmptyStringToNull } from '../../../pipes/emptyStringToNull'
 import { ParseNumericPipe } from '../../../pipes/parseNumericString'
 
-@Controller()
+@Controller('customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
