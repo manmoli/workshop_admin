@@ -13,7 +13,7 @@ export class CustomersService {
     @InjectRepository(Customer) private customerRepo: Repository<Customer>
   ) {}
   async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
-    createCustomerDto.customer_id = await this.#generatecustomer_id(
+    createCustomerDto.customerId = await this.#generateCustomerId(
       createCustomerDto
     )
     const customer: Customer = await this.customerRepo.create(createCustomerDto)
@@ -24,16 +24,16 @@ export class CustomersService {
 
   async findAll(findOptions?: FindOptions<Customer>): Promise<Customer[]> {
     const query = this.customerRepo.createQueryBuilder('customer')
-    if (findOptions?.where?.first_name) {
+    if (findOptions?.where?.firstName) {
       query
         .where('customer.first_name ILIKE :term1', {
-          term1: `%${findOptions.where.first_name}%`
+          term1: `%${findOptions.where.firstName}%`
         })
         .orWhere('customer.second_name ILIKE :term2', {
-          term2: `%${findOptions.where.first_name}%`
+          term2: `%${findOptions.where.firstName}%`
         })
         .orWhere('customer.last_name ILIKE :term3', {
-          term3: `%${findOptions.where.first_name}%`
+          term3: `%${findOptions.where.firstName}%`
         })
     }
     const customers: Customer[] = await query.getMany()
@@ -56,10 +56,10 @@ export class CustomersService {
         .take(findOptions?.take)
         .skip(findOptions?.skip)
 
-      if (findOptions.where?.first_name) {
+      if (findOptions.where?.firstName) {
         query.where(
           'customer.first_name LIKE :searchTerm OR customer.last_name LIKE :searchTerm',
-          { searchTerm: `%${findOptions.where.first_name}%` }
+          { searchTerm: `%${findOptions.where.firstName}%` }
         )
       }
 
@@ -106,17 +106,17 @@ export class CustomersService {
     return affected === 1
   }
 
-  async #generatecustomer_id(customerData: CreateCustomerDto): Promise<string> {
-    let base = customerData.first_name
+  async #generateCustomerId(customerData: CreateCustomerDto): Promise<string> {
+    let base = customerData.firstName
 
-    base = base + customerData.last_name + this.#randomIdCode()
+    base = base + customerData.lastName + this.#randomIdCode()
 
     const existingUser: Customer = await this.customerRepo.findOneBy({
-      customer_id: base
+      customerId: base
     })
 
     if (existingUser) {
-      this.#generatecustomer_id(customerData)
+      this.#generateCustomerId(customerData)
     }
 
     return base

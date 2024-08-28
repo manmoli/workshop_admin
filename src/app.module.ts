@@ -5,24 +5,15 @@ import {
   RequestMethod
 } from '@nestjs/common'
 import { DataSource } from 'typeorm'
-import { BranchModule } from './modules/branches/branch.module'
-import { DepartmentsModule } from './modules/departments/departments.module'
 import { ConfigModule } from '@nestjs/config'
 import { environments } from './environments'
 import { DatabaseModule } from './database/database.module'
 import config from './conf'
 import { joiValidator } from './envValidatorSchema'
 import { CustomersModule } from './modules/customers/customers.module'
-import { VehiclesModule } from './modules/vehicles/vehicles.module'
+import { CustomerVehicleModule } from './modules/customer_vehicles/customer_vehicles.module'
 import { RouterModule } from '@nestjs/core'
-import { UserModule } from './modules/users/users.module'
-import { CustomerCheckMiddleware } from './modules/vehicles/middlewares/client-check.middleware'
-import { AppointmentsModule } from './modules/appointments/appointments.module';
-import { BillingInfoModule } from './billing_info/billing_info.module';
-import { ServicesModule } from './modules/services/services.module';
-import { ServiceTypeModule } from './modules/service_type/service_type.module';
-import { SparePartModule } from './modules/spare_part/spare_part.module';
-import { ServiceOrderModule } from './modules/service_order/service_order.module';
+import { CustomerCheckMiddleware } from './modules/customer_vehicles/middlewares/client-check.middleware'
 import { VehicleModelModule } from './modules/vehicle_model/vehicle_model.module';
 
 @Module({
@@ -34,29 +25,20 @@ import { VehicleModelModule } from './modules/vehicle_model/vehicle_model.module
       validationSchema: joiValidator
     }),
     DatabaseModule,
-    /* BranchModule,
-    DepartmentsModule, */
     CustomersModule,
-    /*VehiclesModule,
+    CustomerVehicleModule,
     RouterModule.register([
       {
         path: 'customers',
         module: CustomersModule,
         children: [
           {
-            path: '/:customer_id/vehicles',
-            module: VehiclesModule
+            path: '/:customerId/vehicles',
+            module: CustomerVehicleModule
           }
         ]
       }
     ]),
-    UserModule,
-    AppointmentsModule,
-    BillingInfoModule,
-    ServicesModule,
-    ServiceTypeModule,
-    SparePartModule,
-    ServiceOrderModule, */
     VehicleModelModule
   ]
 })
@@ -66,7 +48,7 @@ export class AppModule implements NestModule {
     consumer
       .apply(CustomerCheckMiddleware)
       .forRoutes(
-        { path: 'customers/:customer_id/vehicles', method: RequestMethod.ALL }
+        { path: 'customers/:customerId/vehicles', method: RequestMethod.GET }
       )
   }
 }

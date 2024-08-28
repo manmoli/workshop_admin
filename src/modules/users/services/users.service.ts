@@ -19,16 +19,16 @@ export class UsersService {
 
   async findAll(findOptions?: FindOptions<User>): Promise<User[]> {
     const query = this.userRepo.createQueryBuilder('user') // Using 'user' as the alias
-    if (findOptions?.where?.first_name) {
+    if (findOptions?.where?.firstName) {
       query
         .where('user.first_name ILIKE :term1', {
-          term1: `%${findOptions.where.first_name}%`
+          term1: `%${findOptions.where.firstName}%`
         })
         .orWhere('user.second_name ILIKE :term2', {
-          term2: `%${findOptions.where.first_name}%`
+          term2: `%${findOptions.where.firstName}%`
         })
         .orWhere('user.last_name ILIKE :term3', {
-          term3: `%${findOptions.where.first_name}%`
+          term3: `%${findOptions.where.firstName}%`
         })
     }
     const users: User[] = await query.getMany()

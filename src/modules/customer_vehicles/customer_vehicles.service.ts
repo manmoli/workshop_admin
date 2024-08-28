@@ -1,24 +1,32 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { EntityNotFoundError, Repository } from 'typeorm'
-import { FindOptions } from '../../../utils/types'
-import { CreateVehicleDto } from '../dto/create-vehicle.dto'
-import { UpdateVehicleDto } from '../dto/update-vehicle.dto'
+import { FindOptions } from '../../utils/types'
+import { CreateCustomerVehicleDto } from './dto/create-customer-vehicle.dto'
 import * as _ from 'lodash'
-import { CustomerVehicle } from '../entities/vehicle.entity'
+import { CustomerVehicle } from './entities/customer_vehicle.entity'
+import { UpdateCustomerVehicleDto } from './dto/update-customer-vehicle.dto'
+import { Customer } from '../customers/entities/customers.entity'
+import { CustomerVehicleI } from './customer_vehicles.interfaces'
+import { CommonCustomerService } from '../common/services/customers/common-customers.service'
 
 @Injectable()
-export class VehiclesService {
+export class CustomerVehiclesService {
   constructor(
-    @InjectRepository(CustomerVehicle) private vehicleRepo: Repository<CustomerVehicle>
+    @InjectRepository(CustomerVehicle) private vehicleRepo: Repository<CustomerVehicle>,
+    private commonCustomerService: CommonCustomerService
   ) { }
-  create(createVehicleDto: CreateVehicleDto) {
+  async create(createVehicleDto: CreateCustomerVehicleDto) {
+
+    const customer: Customer = await this.commonCustomerService.findOne(createVehicleDto.customerId)
     const createdVehicle: CustomerVehicle = this.vehicleRepo.create(createVehicleDto)
+    createdVehicle.customer = customer
 
     return this.vehicleRepo.save(createdVehicle)
   }
 
-  findAll(findOptions: FindOptions<CustomerVehicle>) {
+  async findAll(findOptions: FindOptions<CustomerVehicleI>) {
+
     return this.vehicleRepo.find(findOptions)
   }
 
@@ -36,7 +44,7 @@ export class VehiclesService {
     }
   }
 
-  async update(id: number, updateVehicleDto: UpdateVehicleDto) {
+  async update(id: number, updateVehicleDto: UpdateCustomerVehicleDto) {
     const { affected } = await this.vehicleRepo.update({ id }, updateVehicleDto)
 
     if (_.isNil(affected) || affected === 0) {

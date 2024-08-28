@@ -6,20 +6,20 @@ export class Person {
   id: number
 
   @Column({ type: 'varchar' })
-  first_name: string
+  firstName: string
 
   @Column({ type: 'varchar', nullable: true })
-  second_name: string
+  secondName: string
 
   @Column({ type: 'varchar' })
-  last_name: string
+  lastName: string
 
   @Column({ type: 'int', nullable: true })
   age: number
 
   @Column({ type: 'varchar', unique: true, nullable: true })
-  image_url: string
+  imageUrl: string
 
   @Column({ type: 'varchar', unique: true, nullable: true })
-  phone_number: string
+  phoneNumber: string
 }

@@ -8,10 +8,10 @@ export class Appointment {
   @Column({ type: 'int', nullable: false })
   customerId: number
 
-  @ManyToOne(() => Customer, (customer) => customer.appointments, {
+/*   @ManyToOne(() => Customer, (customer) => customer.appointments, {
     onDelete: 'CASCADE'
   })
-  customer: Customer
+  customer: Customer */
 
   @Column({ type: 'int', nullable: true })
   vehicleId: number

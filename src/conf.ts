@@ -10,7 +10,8 @@ export const dataSourceOptions: DataSourceOptions = {
   username: 'root',
   password: 'root',
   database: 'workshop-admin',
-  entities: [],
+  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+  migrations: [__dirname + '/migrations/*{.ts,.js}'],
   synchronize: true
 }
 

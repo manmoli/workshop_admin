@@ -11,14 +11,15 @@ export class CustomerCheckMiddleware implements NestMiddleware {
   ) {}
 
   async use(req: Request, res: Response, next: () => void) {
-    const customer_id: number = +req.params.customer_id
+    const customerId: number = +req.params.customerId
     const customer: Customer = await this.customerRepo.findOneBy({
-      id: customer_id
+      id: customerId
     })
 
     if (customer === null) {
-      throw new EntityNotFoundError(Customer, { id: customer_id })
+      throw new EntityNotFoundError(Customer, { id: customerId })
     }
+        
     next()
   }
 }

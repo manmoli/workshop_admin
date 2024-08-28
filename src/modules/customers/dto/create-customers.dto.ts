@@ -3,15 +3,15 @@ import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 export class CreateCustomerDto {
   @IsString()
   @IsNotEmpty()
-  first_name: string
+  firstName: string
 
   @IsString()
   @IsOptional()
-  second_name: string
+  secondName: string
 
   @IsString()
   @IsNotEmpty()
-  last_name: string
+  lastName: string
 
   @IsNumber()
   @IsOptional()
@@ -19,15 +19,15 @@ export class CreateCustomerDto {
 
   @IsString()
   @IsOptional()
-  customer_id: string
+  customerId: string
 
   @IsString()
   @IsOptional()
-  phone_number: string
+  phoneNumber: string
 
   @IsString()
   @IsOptional()
-  image_url: string
+  imageUrl: string
 }
 
 export class CreateCustomerWIthImageDto extends CreateCustomerDto {

@@ -20,11 +20,11 @@ export class User extends Person {
     enum: UserType,
     default: UserType.MECHANIC
   })
-  user_type: UserType
+  userType: UserType
 
   @Column({ type: 'text', nullable: true })
-  days_to_work: string
+  daysToWork: string
 
   @Column({ type: 'date' })
-  employee_since: Date
+  employeeSince: Date
 }

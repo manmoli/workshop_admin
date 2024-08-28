@@ -21,7 +21,7 @@ import { Customer } from '../entities/customers.entity'
 import { EmptyStringToNull } from '../../../pipes/emptyStringToNull'
 import { ParseNumericPipe } from '../../../pipes/parseNumericString'
 
-@Controller('customers')
+@Controller()
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
@@ -29,9 +29,9 @@ export class CustomersController {
   @Post()
   create(@Body() createCustomerDto: CreateCustomerWIthImageDto) {
     const customerDtoObject = new CreateCustomerDto()
-    customerDtoObject.first_name = createCustomerDto.first_name
-    customerDtoObject.last_name = createCustomerDto.last_name
-    customerDtoObject.phone_number = createCustomerDto.phone_number
+    customerDtoObject.firstName = createCustomerDto.firstName
+    customerDtoObject.lastName = createCustomerDto.lastName
+    customerDtoObject.phoneNumber = createCustomerDto.phoneNumber
     return this.customersService.create(customerDtoObject)
   }
 
