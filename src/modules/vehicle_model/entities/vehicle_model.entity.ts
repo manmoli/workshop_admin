@@ -24,6 +24,6 @@ export class VehicleModel {
   @Column({ type: 'varchar', nullable: true })
   vehicle_transmission: string
 
-  @OneToMany(() => CustomerVehicle, customerVehicle => customerVehicle.VehicleModel)
+  @OneToMany(() => CustomerVehicle, customerVehicle => customerVehicle.vehicleModel)
   customerVehicles: CustomerVehicle[]
 }

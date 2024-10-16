@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { EntityNotFoundError, Repository } from 'typeorm'
+import { EntityNotFoundError, FindManyOptions, Like, Repository } from 'typeorm'
 import { FindOptions } from '../../../utils/types'
 import { CreateCustomerDto } from '../dto/create-customers.dto'
 import { UpdateCustomerDto } from '../dto/update-customers.dto'
@@ -36,6 +36,7 @@ export class CustomersService {
           term3: `%${findOptions.where.firstName}%`
         })
     }
+
     const customers: Customer[] = await query.getMany()
 
     return customers
@@ -45,25 +46,43 @@ export class CustomersService {
     findOptions?: FindOptions<Customer>
   ): Promise<Customer[]> {
     try {
-      const query = this.customerRepo
-        .createQueryBuilder('customer')
-        .leftJoinAndSelect(
-          'customer.vehicles',
-          'vehicle',
-          'vehicle.customerId = customer.id'
-        )
-        .select(['customer', 'vehicle.model', 'vehicle.brand'])
-        .take(findOptions?.take)
-        .skip(findOptions?.skip)
 
-      if (findOptions.where?.firstName) {
-        query.where(
-          'customer.first_name LIKE :searchTerm OR customer.last_name LIKE :searchTerm',
-          { searchTerm: `%${findOptions.where.firstName}%` }
-        )
+      const query: FindManyOptions<Customer> = {
+        select: {
+          id: true,
+          firstName: true,
+          secondName: true,
+          lastName: true,
+          phoneNumber: true,
+          customerVehicles: {
+            licensePlate: true,
+            vin: true,
+            vehicleModel: {
+              brand: true,
+              model: true,
+              model_year: true,
+              cylinders: true,
+              vehicle_engine: true,
+              vehicle_transmission: true,
+            }
+          }
+        },
+        relations: {
+          customerVehicles: {
+            vehicleModel: true
+          }
+        }
       }
 
-      const customers = await query.getMany()
+      if(findOptions.where) {
+        query.where = [
+          { firstName: Like(findOptions.where.firstName)},
+          { secondName: Like(findOptions.where.firstName)},
+          { lastName: Like(findOptions.where.firstName)},
+        ]
+      }
+
+      const customers = await this.customerRepo.find(query)
 
       return customers
     } catch (error) {

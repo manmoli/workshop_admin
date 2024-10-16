@@ -18,8 +18,5 @@ export class Person {
   age: number
 
   @Column({ type: 'varchar', unique: true, nullable: true })
-  imageUrl: string
-
-  @Column({ type: 'varchar', unique: true, nullable: true })
   phoneNumber: string
 }

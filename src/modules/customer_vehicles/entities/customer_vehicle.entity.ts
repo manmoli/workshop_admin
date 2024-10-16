@@ -17,12 +17,12 @@ export class CustomerVehicle {
   vehicleModelId: number
 
   @ManyToOne(() => VehicleModel, vehicleModel => vehicleModel.customerVehicles)
-  VehicleModel: VehicleModel
+  vehicleModel: VehicleModel
   
   @Column({ type: 'int', nullable: false })
   customerId: number
 
-  @ManyToOne(() => Customer, customer => customer.customerVehicles)
+  @ManyToOne(() => Customer, customer => customer.customerVehicles, {onDelete: 'CASCADE'})
   customer: Customer
 }
 //make, model, cylinders, year, trany, displ, cylinders, year

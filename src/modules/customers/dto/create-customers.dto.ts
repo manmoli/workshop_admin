@@ -24,10 +24,6 @@ export class CreateCustomerDto {
   @IsString()
   @IsOptional()
   phoneNumber: string
-
-  @IsString()
-  @IsOptional()
-  imageUrl: string
 }
 
 export class CreateCustomerWIthImageDto extends CreateCustomerDto {

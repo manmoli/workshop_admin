@@ -27,12 +27,33 @@ export class CustomerVehiclesService {
 
   async findAll(findOptions: FindOptions<CustomerVehicleI>) {
 
-    return this.vehicleRepo.find(findOptions)
+    return this.vehicleRepo.find({...findOptions,
+      relations: ['vehicleModel'],
+      select: {
+        id: true,
+        licensePlate: true,
+        vin: true,
+        customerId: true
+      }
+    })
   }
 
   async findOne(id: number) {
     try {
-      const vehicle: CustomerVehicle = await this.vehicleRepo.findOne({ where: { id }, relations: ['customer'] })
+      const vehicle: CustomerVehicle = await this.vehicleRepo.findOne({ 
+        where: { id }, 
+        select: {
+          id: true,
+          licensePlate: true,
+          vin: true,
+          customer: {
+            id: true,
+            firstName: true,
+            lastName: true
+          }
+        },
+        relations: ['customer', 'vehicleModel'],
+      })
       if (!vehicle) {
         throw new EntityNotFoundError(CustomerVehicle, { id })
       }
