@@ -74,7 +74,7 @@ export class CustomersService {
         }
       }
 
-      if(findOptions.where) {
+      if(findOptions.where?.firstName) {
         query.where = [
           { firstName: Like(findOptions.where.firstName)},
           { secondName: Like(findOptions.where.firstName)},
